@@ -1,0 +1,12 @@
+- package: strslice
+  slice_type: strings
+  type: string
+- package: intslice
+  slice_type: ints
+  type: int
+- package: flt64slice
+  slice_type: floats64
+  type: float64
+- package: flt32slice
+  slice_type: floats32
+  type: float32
