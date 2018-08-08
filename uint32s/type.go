@@ -15,20 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package float64s provides ...
-package float64s
+// Package uint32s provides ...
+package uint32s
 
-// float64s ...
-type float64s []float64
+// uint32s ...
+type uint32s []uint32
 
 // New ...
-func New(s []float64) float64s {
-	return float64s(s)
+func New(s []uint32) uint32s {
+	return uint32s(s)
 }
 
 // Map ...
-func Map(s []float64, f func(s float64) float64) float64s {
-	m := float64s(make([]float64, len(s)))
+func Map(s []uint32, f func(s uint32) uint32) uint32s {
+	m := uint32s(make([]uint32, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -36,13 +36,13 @@ func Map(s []float64, f func(s float64) float64) float64s {
 }
 
 // Map ...
-func (s float64s) Map(f func(s float64) float64) float64s {
+func (s uint32s) Map(f func(s uint32) uint32) uint32s {
 	return Map(s, f)
 }
 
 // Filter ...
-func Filter(s []float64, f func(s float64) bool) float64s {
-	m := float64s(make([]float64, 0, len(s)))
+func Filter(s []uint32, f func(s uint32) bool) uint32s {
+	m := uint32s(make([]uint32, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -52,12 +52,12 @@ func Filter(s []float64, f func(s float64) bool) float64s {
 }
 
 // Filter ...
-func (s float64s) Filter(f func(s float64) bool) float64s {
+func (s uint32s) Filter(f func(s uint32) bool) uint32s {
 	return Filter(s, f)
 }
 
 // Reduce ...
-func Reduce(s []float64, f func(sum, value float64) float64, neutral float64) float64 {
+func Reduce(s []uint32, f func(sum, value uint32) uint32, neutral uint32) uint32 {
 	res := neutral
 	for _, e := range s {
 		res = f(res, e)
@@ -66,14 +66,14 @@ func Reduce(s []float64, f func(sum, value float64) float64, neutral float64) fl
 }
 
 // Reduce ...
-func (s float64s) Reduce(f func(sum, value float64) float64, neutral float64) float64 {
+func (s uint32s) Reduce(f func(sum, value uint32) uint32, neutral uint32) uint32 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique ...
-func Unique(s []float64) float64s {
-	m := float64s(make([]float64, 0, len(s)))
-	seen := make(map[float64]struct{})
+func Unique(s []uint32) uint32s {
+	m := uint32s(make([]uint32, 0, len(s)))
+	seen := make(map[uint32]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
 			m = append(m, v)
@@ -84,6 +84,6 @@ func Unique(s []float64) float64s {
 }
 
 // Unique ...
-func (s float64s) Unique() float64s {
+func (s uint32s) Unique() uint32s {
 	return Unique(s)
 }

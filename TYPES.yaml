@@ -1,15 +1,77 @@
-- package: ints
-  slice_type: ints
-  type: int
+- package: interfaces
+  slice_type: interfaces
+  type: interface{}
 - package: strings
   slice_type: strings
   type: string
 - package: bools
   slice_type: bools
   type: bool
-- package: float64s
-  slice_type: float64s
-  type: float64
+# the set of all unsigned  8-bit integers (0 to 255)
+- package: uint8s
+  slice_type: uint8s
+  type: uint8
+# the set of all unsigned 16-bit integers (0 to 65535)
+- package: uint16s
+  slice_type: uint16s
+  type: uint16
+# the set of all unsigned 32-bit integers (0 to 4294967295)
+- package: uint32s
+  slice_type: uint32s
+  type: uint32
+# the set of all unsigned 64-bit integers (0 to 18446744073709551615)
+- package: uint64s
+  slice_type: uint64s
+  type: uint64
+# the set of all signed  8-bit integers (-128 to 127)
+- package: int8s
+  slice_type: int8s
+  type: int8
+# the set of all signed 16-bit integers (-32768 to 32767)
+- package: int16s
+  slice_type: int16s
+  type: int16
+# the set of all signed 32-bit integers (-2147483648 to 2147483647)
+- package: int32s
+  slice_type: int32s
+  type: int32
+# the set of all signed 64-bit integers (-9223372036854775808 to 9223372036854775807)
+- package: int64s
+  slice_type: int64s
+  type: int64
+# the set of all IEEE-754 32-bit floating-point numbers
 - package: float32s
   slice_type: float32s
   type: float32
+# the set of all IEEE-754 64-bit floating-point numbers
+- package: float64s
+  slice_type: float64s
+  type: float64
+# the set of all complex numbers with float32 real and imaginary parts
+- package: complex64s
+  slice_type: complex64s
+  type: complex64
+# the set of all complex numbers with float64 real and imaginary parts
+- package: complex128s
+  slice_type: complex128s
+  type: complex128
+# alias for uint8
+- package: bytes
+  slice_type: bytes
+  type: byte
+# alias for int32
+- package: runes
+  slice_type: runes
+  type: rune
+# either 32 or 64 bits
+- package: ints
+  slice_type: ints
+  type: int
+# either 32 or 64 bits
+- package: uints
+  slice_type: uints
+  type: uint
+# an unsigned integer large enough to store the uninterpreted bits of a pointer value
+- package: uintptrs
+  slice_type: uintptrs
+  type: uintptr

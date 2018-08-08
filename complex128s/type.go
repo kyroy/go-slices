@@ -15,20 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package float64s provides ...
-package float64s
+// Package complex128s provides ...
+package complex128s
 
-// float64s ...
-type float64s []float64
+// complex128s ...
+type complex128s []complex128
 
 // New ...
-func New(s []float64) float64s {
-	return float64s(s)
+func New(s []complex128) complex128s {
+	return complex128s(s)
 }
 
 // Map ...
-func Map(s []float64, f func(s float64) float64) float64s {
-	m := float64s(make([]float64, len(s)))
+func Map(s []complex128, f func(s complex128) complex128) complex128s {
+	m := complex128s(make([]complex128, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -36,13 +36,13 @@ func Map(s []float64, f func(s float64) float64) float64s {
 }
 
 // Map ...
-func (s float64s) Map(f func(s float64) float64) float64s {
+func (s complex128s) Map(f func(s complex128) complex128) complex128s {
 	return Map(s, f)
 }
 
 // Filter ...
-func Filter(s []float64, f func(s float64) bool) float64s {
-	m := float64s(make([]float64, 0, len(s)))
+func Filter(s []complex128, f func(s complex128) bool) complex128s {
+	m := complex128s(make([]complex128, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -52,12 +52,12 @@ func Filter(s []float64, f func(s float64) bool) float64s {
 }
 
 // Filter ...
-func (s float64s) Filter(f func(s float64) bool) float64s {
+func (s complex128s) Filter(f func(s complex128) bool) complex128s {
 	return Filter(s, f)
 }
 
 // Reduce ...
-func Reduce(s []float64, f func(sum, value float64) float64, neutral float64) float64 {
+func Reduce(s []complex128, f func(sum, value complex128) complex128, neutral complex128) complex128 {
 	res := neutral
 	for _, e := range s {
 		res = f(res, e)
@@ -66,14 +66,14 @@ func Reduce(s []float64, f func(sum, value float64) float64, neutral float64) fl
 }
 
 // Reduce ...
-func (s float64s) Reduce(f func(sum, value float64) float64, neutral float64) float64 {
+func (s complex128s) Reduce(f func(sum, value complex128) complex128, neutral complex128) complex128 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique ...
-func Unique(s []float64) float64s {
-	m := float64s(make([]float64, 0, len(s)))
-	seen := make(map[float64]struct{})
+func Unique(s []complex128) complex128s {
+	m := complex128s(make([]complex128, 0, len(s)))
+	seen := make(map[complex128]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
 			m = append(m, v)
@@ -84,6 +84,6 @@ func Unique(s []float64) float64s {
 }
 
 // Unique ...
-func (s float64s) Unique() float64s {
+func (s complex128s) Unique() complex128s {
 	return Unique(s)
 }

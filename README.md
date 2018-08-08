@@ -18,25 +18,42 @@ import (
 
 func main() {
 	x := []string{"a", "b", "a", "c", "d"}
-	fmt.Println(strings.Filter(x, func(s string) bool {
+	y := strings.Filter(x, func(s string) bool {
 		return s > "b"
 	}).Map(func(s string) string {
 		return s + "!"
-	}))
-	fmt.Println(strings.Reduce(x, func(s, v string) string {
+	})
+	z := strings.Unique(x)
+
+	a := strings.New([]string{"e", "f", "g", "h"})
+	b := a.Filter(func(s string) bool {
+		return s > "b"
+	}).Map(func(s string) string {
+		return s + "!"
+	})
+	c := a.Reduce(func(s, v string) string {
 		return s + v
-	}, ""))
-	fmt.Println(strings.Unique(x))
+	}, "")
+
+	fmt.Println("x           ", x)
+	fmt.Println("y filter map", y)
+	fmt.Println("z unique    ", z)
+	fmt.Println("a new       ", a)
+	fmt.Println("b filter map", b)
+	fmt.Println("c reduce    ", c)
 }
 ```
 prints
 ```
-[c! d!]
-abacd
-[a b c d]
+x            [a b a c d]
+y filter map [c! d!]
+z unique     [a b c d]
+a new        [e f g h]
+b filter map [e! f! g! h!]
+c reduce     efgh
 ```
 
 ## Generating Slices
 ```bash
-go run generator/main.go TYPES.yaml
+go run generator/main.go TYPES.yaml TESTS.yaml
 ```

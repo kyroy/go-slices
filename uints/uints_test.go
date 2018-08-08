@@ -15,10 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ints_test
+package uints_test
 
 import (
-	"github.com/kyroy/go-slices/ints"
+	"github.com/kyroy/go-slices/uints"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"fmt"
@@ -28,28 +28,28 @@ var _ = fmt.Print
 
 func TestMap(t *testing.T) {
 	type args struct {
-		s []int
-		f func(s int) int
+		s []uint
+		f func(s uint) uint
 	}
 	tests := []struct {
 		name string
 		args args
-		want []int
+		want []uint
 	}{
 		{
 			name: "basic",
 			args: args{
-				s: []int{1, 3, 4, 6},
-				f: func(x int) int { return x + 1 },
+				s: []uint{1, 3, 4, 6},
+				f: func(x uint) uint { return x + 1 },
 			},
-			want: []int{2, 4, 5, 7},
+			want: []uint{2, 4, 5, 7},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var got []int = ints.Map(tt.args.s, tt.args.f)
+			var got []uint = uints.Map(tt.args.s, tt.args.f)
 			assert.Equal(t, tt.want, got)
-			got = ints.New(tt.args.s).Map(tt.args.f)
+			got = uints.New(tt.args.s).Map(tt.args.f)
 			assert.Equal(t, tt.want, got)
 		})
 	}
@@ -57,28 +57,28 @@ func TestMap(t *testing.T) {
 
 func TestFilter(t *testing.T) {
 	type args struct {
-		s []int
-		f func(s int) bool
+		s []uint
+		f func(s uint) bool
 	}
 	tests := []struct {
 		name string
 		args args
-		want []int
+		want []uint
 	}{
 		{
 			name: "basic",
 			args: args{
-				s: []int{1, 2, 3, 4, 2},
-				f: func(x int) bool { return x%2 == 0 },
+				s: []uint{1, 2, 3, 4, 2},
+				f: func(x uint) bool { return x%2 == 0 },
 			},
-			want: []int{2, 4, 2},
+			want: []uint{2, 4, 2},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var got []int = ints.Filter(tt.args.s, tt.args.f)
+			var got []uint = uints.Filter(tt.args.s, tt.args.f)
 			assert.Equal(t, tt.want, got)
-			got = ints.New(tt.args.s).Filter(tt.args.f)
+			got = uints.New(tt.args.s).Filter(tt.args.f)
 			assert.Equal(t, tt.want, got)
 		})
 	}
@@ -86,20 +86,20 @@ func TestFilter(t *testing.T) {
 
 func TestReduce(t *testing.T) {
 	type args struct {
-		s       []int
-		f       func(sum, value int) int
-		neutral int
+		s       []uint
+		f       func(sum, value uint) uint
+		neutral uint
 	}
 	tests := []struct {
 		name string
 		args args
-		want int
+		want uint
 	}{
 		{
 			name: "basic",
 			args: args{
-				s:       []int{1, 3, 4},
-				f:       func(sum, value int) int { return sum + value },
+				s:       []uint{1, 3, 4},
+				f:       func(sum, value uint) uint { return sum + value },
 				neutral: 0,
 			},
 			want: 8,
@@ -107,9 +107,9 @@ func TestReduce(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var got int = ints.Reduce(tt.args.s, tt.args.f, tt.args.neutral)
+			var got uint = uints.Reduce(tt.args.s, tt.args.f, tt.args.neutral)
 			assert.Equal(t, tt.want, got)
-			got = ints.New(tt.args.s).Reduce(tt.args.f, tt.args.neutral)
+			got = uints.New(tt.args.s).Reduce(tt.args.f, tt.args.neutral)
 			assert.Equal(t, tt.want, got)
 		})
 	}
@@ -117,26 +117,26 @@ func TestReduce(t *testing.T) {
 
 func TestUnique(t *testing.T) {
 	type args struct {
-		s []int
+		s []uint
 	}
 	tests := []struct {
 		name string
 		args args
-		want []int
+		want []uint
 	}{
 		{
 			name: "basic",
 			args: args{
-				s: []int{1, 3, 4, 6, 3, 2, 1},
+				s: []uint{1, 3, 4, 6, 3, 2, 1},
 			},
-			want: []int{1, 3, 4, 6, 2},
+			want: []uint{1, 3, 4, 6, 2},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var got []int = ints.Unique(tt.args.s)
+			var got []uint = uints.Unique(tt.args.s)
 			assert.Equal(t, tt.want, got)
-			got = ints.New(tt.args.s).Unique()
+			got = uints.New(tt.args.s).Unique()
 			assert.Equal(t, tt.want, got)
 		})
 	}
