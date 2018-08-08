@@ -1,12 +1,15 @@
-- package: strslice
-  slice_type: strings
-  type: string
-- package: intslice
+- package: ints
   slice_type: ints
   type: int
-- package: flt64slice
-  slice_type: floats64
+- package: strings
+  slice_type: strings
+  type: string
+- package: bools
+  slice_type: bools
+  type: bool
+- package: float64s
+  slice_type: float64s
   type: float64
-- package: flt32slice
-  slice_type: floats32
+- package: float32s
+  slice_type: float32s
   type: float32

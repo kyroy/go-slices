@@ -1,35 +1,35 @@
-package strslice_test
+package bools_test
 
 import (
-	"github.com/kyroy/go-slices/strslice"
+	"github.com/kyroy/go-slices/bools"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestMap(t *testing.T) {
 	type args struct {
-		s []string
-		f func(s string) string
+		s []bool
+		f func(s bool) bool
 	}
 	tests := []struct {
 		name string
 		args args
-		want []string
+		want []bool
 	}{
 		{
 			name: "basic",
 			args: args{
-				s: []string{"a", "aa", "b", "c", "d"},
-				f: func(s string) string {
-					return s + "!"
+				s: []bool{true, false, true},
+				f: func(s bool) bool {
+					return !s
 				},
 			},
-			want: []string{"a!", "aa!", "b!", "c!", "d!"},
+			want: []bool{false, true, false},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var got []string = strslice.Map(tt.args.s, tt.args.f)
+			var got []bool = bools.Map(tt.args.s, tt.args.f)
 			assert.Equal(t, tt.want, got)
 		})
 	}
