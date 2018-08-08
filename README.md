@@ -6,6 +6,36 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/kyroy/go-slices)](https://goreportcard.com/report/github.com/kyroy/go-slices)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/kyroy/go-slices/blob/master/LICENSE)
 
+## Example using `strings`
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/kyroy/go-slices/strings"
+)
+
+func main() {
+	x := []string{"a", "b", "a", "c", "d"}
+	fmt.Println(strings.Filter(x, func(s string) bool {
+		return s > "b"
+	}).Map(func(s string) string {
+		return s + "!"
+	}))
+	fmt.Println(strings.Reduce(x, func(s, v string) string {
+		return s + v
+	}, ""))
+	fmt.Println(strings.Unique(x))
+}
+```
+prints
+```
+[c! d!]
+abacd
+[a b c d]
+```
+
 ## Generating Slices
 ```bash
 go run generator/main.go TYPES.yaml
