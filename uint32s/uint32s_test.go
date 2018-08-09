@@ -176,3 +176,119 @@ func TestIntersect(t *testing.T) {
 		})
 	}
 }
+
+func TestContains(t *testing.T) {
+	type args struct {
+		s []uint32
+		x uint32
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []uint32{1, 2, 3, 4},
+				x: 3,
+			},
+			want: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []uint32{1, 1, 2, 1, 3, 5, 4},
+				x: 0,
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got bool = uint32s.Contains(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = uint32s.New(tt.args.s).Contains(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestIndexOf(t *testing.T) {
+	type args struct {
+		s []uint32
+		x uint32
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []uint32{1, 2, 3, 4},
+				x: 3,
+			},
+			want: 2,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []uint32{1, 1, 2, 1, 3, 5, 4},
+				x: 0,
+			},
+			want: -1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got int = uint32s.IndexOf(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = uint32s.New(tt.args.s).IndexOf(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestFind(t *testing.T) {
+	type args struct {
+		s []uint32
+		f func(uint32) bool
+	}
+	tests := []struct {
+		name string
+		args args
+		want uint32
+		found bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []uint32{1, 2, 3, 4, 2},
+				f: func(x uint32) bool { return x > 1 && x < 4 },
+			},
+			want: 2,
+			found: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []uint32{1, 2, 3, 4, 2},
+				f: func(x uint32) bool { return x > 5 },
+			},
+			want: 0,
+			found: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got1 *uint32 = uint32s.Find(tt.args.s, tt.args.f)
+			var got2 *uint32 = uint32s.New(tt.args.s).Find(tt.args.f)
+			if tt.found {
+				assert.Equal(t, &tt.want, got1)
+				assert.Equal(t, &tt.want, got2)
+			} else {
+				assert.Nil(t, got1)
+				assert.Nil(t, got2)
+			}
+		})
+	}
+}

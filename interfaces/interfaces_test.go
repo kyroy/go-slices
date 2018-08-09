@@ -176,3 +176,119 @@ func TestIntersect(t *testing.T) {
 		})
 	}
 }
+
+func TestContains(t *testing.T) {
+	type args struct {
+		s []interface{}
+		x interface{}
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				x: 2,
+			},
+			want: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				x: "2",
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got bool = interfaces.Contains(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = interfaces.New(tt.args.s).Contains(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestIndexOf(t *testing.T) {
+	type args struct {
+		s []interface{}
+		x interface{}
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				x: 2,
+			},
+			want: 4,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				x: "2",
+			},
+			want: -1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got int = interfaces.IndexOf(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = interfaces.New(tt.args.s).IndexOf(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestFind(t *testing.T) {
+	type args struct {
+		s []interface{}
+		f func(interface{}) bool
+	}
+	tests := []struct {
+		name string
+		args args
+		want interface{}
+		found bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				f: func(x interface{}) bool { return x == interface{}(1) },
+			},
+			want: 1,
+			found: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				f: func(x interface{}) bool { return x == nil },
+			},
+			want: "x",
+			found: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got1 *interface{} = interfaces.Find(tt.args.s, tt.args.f)
+			var got2 *interface{} = interfaces.New(tt.args.s).Find(tt.args.f)
+			if tt.found {
+				assert.Equal(t, &tt.want, got1)
+				assert.Equal(t, &tt.want, got2)
+			} else {
+				assert.Nil(t, got1)
+				assert.Nil(t, got2)
+			}
+		})
+	}
+}

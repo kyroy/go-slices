@@ -31,3 +31,32 @@ tests:
     in: '{"a", 1, "1", 1, 2, "a"}'
     more: '{{"a", 1, "1"}, {"1", 1}}'
     out: '{1, "1"}'
+  contains:
+  - name: contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    elem: '2'
+    out: 'true'
+  - name: not_contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    elem: '"2"'
+    out: 'false'
+  indexof:
+  - name: contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    elem: '2'
+    out: '4'
+  - name: not_contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    elem: '"2"'
+    out: '-1'
+  find:
+  - name: contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    func: '{ return x == interface{}(1) }'
+    out: '1'
+    found: true
+  - name: not_contains
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    func: '{ return x == nil }'
+    out: '"x"'
+    found: false

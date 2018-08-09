@@ -164,4 +164,49 @@ func Intersect(s []{{ $.Type }}, more ...[]{{ $.Type }}) {{ $slice }} {
 func (s {{ $slice }}) Intersect(more ...[]{{ $.Type }}) {{ $slice }} {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []{{ $.Type }}, x {{ $.Type }}) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s {{ $slice }}) Contains(x {{ $.Type }}) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []{{ $.Type }}, x {{ $.Type }}) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s {{ $slice }}) IndexOf(x {{ $.Type }}) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []{{ $.Type }}, f func({{ $.Type }}) bool) *{{ $.Type }} {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s {{ $slice }}) Find(f func({{ $.Type }}) bool) *{{ $.Type }} {
+	return Find(s, f)
+}
 {{ end }}`))

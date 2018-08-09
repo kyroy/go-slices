@@ -138,3 +138,48 @@ func Intersect(s []uintptr, more ...[]uintptr) Uintptrs {
 func (s Uintptrs) Intersect(more ...[]uintptr) Uintptrs {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []uintptr, x uintptr) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Uintptrs) Contains(x uintptr) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []uintptr, x uintptr) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Uintptrs) IndexOf(x uintptr) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []uintptr, f func(uintptr) bool) *uintptr {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Uintptrs) Find(f func(uintptr) bool) *uintptr {
+	return Find(s, f)
+}

@@ -138,3 +138,48 @@ func Intersect(s []byte, more ...[]byte) Bytes {
 func (s Bytes) Intersect(more ...[]byte) Bytes {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []byte, x byte) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Bytes) Contains(x byte) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []byte, x byte) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Bytes) IndexOf(x byte) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []byte, f func(byte) bool) *byte {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Bytes) Find(f func(byte) bool) *byte {
+	return Find(s, f)
+}

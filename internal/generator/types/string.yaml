@@ -38,3 +38,32 @@ tests:
     in: '{"a", "b", "c", "a"}'
     more: '{{"a", "b", "a"}, {"b", "a"}}'
     out: '{"a", "b"}'
+  contains:
+  - name: contains
+    in: '{"a", "b", "c", "a"}'
+    elem: '"b"'
+    out: 'true'
+  - name: not_contains
+    in: '{"a", "b", "c", "a"}'
+    elem: '"d"'
+    out: 'false'
+  indexof:
+  - name: contains
+    in: '{"a", "b", "c", "a"}'
+    elem: '"b"'
+    out: '1'
+  - name: not_contains
+    in: '{"a", "b", "c", "a"}'
+    elem: '"d"'
+    out: '-1'
+  find:
+  - name: contains
+    in: '{"a", "b", "c", "a"}'
+    func: '{ return x > "a" }'
+    out: '"b"'
+    found: true
+  - name: not_contains
+    in: '{"a", "b", "c", "a"}'
+    func: '{ return x < "a" }'
+    out: '"x"'
+    found: false

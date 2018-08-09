@@ -138,3 +138,48 @@ func Intersect(s []uint8, more ...[]uint8) Uint8s {
 func (s Uint8s) Intersect(more ...[]uint8) Uint8s {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []uint8, x uint8) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Uint8s) Contains(x uint8) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []uint8, x uint8) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Uint8s) IndexOf(x uint8) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []uint8, f func(uint8) bool) *uint8 {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Uint8s) Find(f func(uint8) bool) *uint8 {
+	return Find(s, f)
+}

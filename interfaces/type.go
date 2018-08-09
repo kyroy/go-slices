@@ -138,3 +138,48 @@ func Intersect(s []interface{}, more ...[]interface{}) Interfaces {
 func (s Interfaces) Intersect(more ...[]interface{}) Interfaces {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []interface{}, x interface{}) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Interfaces) Contains(x interface{}) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []interface{}, x interface{}) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Interfaces) IndexOf(x interface{}) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []interface{}, f func(interface{}) bool) *interface{} {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Interfaces) Find(f func(interface{}) bool) *interface{} {
+	return Find(s, f)
+}

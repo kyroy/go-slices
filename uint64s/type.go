@@ -138,3 +138,48 @@ func Intersect(s []uint64, more ...[]uint64) Uint64s {
 func (s Uint64s) Intersect(more ...[]uint64) Uint64s {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []uint64, x uint64) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Uint64s) Contains(x uint64) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []uint64, x uint64) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Uint64s) IndexOf(x uint64) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []uint64, f func(uint64) bool) *uint64 {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Uint64s) Find(f func(uint64) bool) *uint64 {
+	return Find(s, f)
+}

@@ -71,6 +71,25 @@ type testDef struct {
 		More string
 		Out  string
 	}
+	Contains []struct {
+		Name string
+		In   string
+		Elem string
+		Out  string
+	}
+	IndexOf []struct {
+		Name string
+		In   string
+		Elem string
+		Out  string
+	}
+	Find []struct {
+		Name  string
+		In    string
+		Func  string
+		Out   string
+		Found bool
+	}
 }
 
 func main() {

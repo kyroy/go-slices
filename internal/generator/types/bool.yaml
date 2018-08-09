@@ -46,3 +46,32 @@ tests:
     in: '{false, true, false, true}'
     more: '{{false, true, false, false}, {false, true, false, true, false}}'
     out: '{false, true, false}'
+  contains:
+  - name: contains
+    in: '{true, false, true}'
+    elem: 'false'
+    out: 'true'
+  - name: not_contains
+    in: '{true, true, true}'
+    elem: 'false'
+    out: 'false'
+  indexof:
+  - name: contains
+    in: '{true, false, true}'
+    elem: 'false'
+    out: '1'
+  - name: not_contains
+    in: '{true, true, true}'
+    elem: 'false'
+    out: '-1'
+  find:
+  - name: contains
+    in: '{true, false, true}'
+    func: '{ return x }'
+    out: 'true'
+    found: true
+  - name: not_contains
+    in: '{false, false, false}'
+    func: '{ return x }'
+    out: 'true'
+    found: false

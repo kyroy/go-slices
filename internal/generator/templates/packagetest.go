@@ -190,4 +190,98 @@ func TestIntersect(t *testing.T) {
 		})
 	}
 }{{ end }}
+{{ if .Tests.Contains }}
+func TestContains(t *testing.T) {
+	type args struct {
+		s []{{ .Type }}
+		x {{ .Type }}
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{{ range .Tests.Contains }}{
+			name: "{{ .Name }}",
+			args: args{
+				s: []{{ $.Type }}{{ .In }},
+				x: {{ .Elem }},
+			},
+			want: {{ .Out }},
+		},{{ end }}
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got bool = {{ .Package }}.Contains(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = {{ .Package }}.New(tt.args.s).Contains(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}{{ end }}
+{{ if .Tests.IndexOf }}
+func TestIndexOf(t *testing.T) {
+	type args struct {
+		s []{{ .Type }}
+		x {{ .Type }}
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{{ range .Tests.IndexOf }}{
+			name: "{{ .Name }}",
+			args: args{
+				s: []{{ $.Type }}{{ .In }},
+				x: {{ .Elem }},
+			},
+			want: {{ .Out }},
+		},{{ end }}
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got int = {{ .Package }}.IndexOf(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = {{ .Package }}.New(tt.args.s).IndexOf(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}{{ end }}
+{{ if .Tests.Find }}
+func TestFind(t *testing.T) {
+	type args struct {
+		s []{{ .Type }}
+		f func({{ .Type }}) bool
+	}
+	tests := []struct {
+		name string
+		args args
+		want {{ .Type }}
+		found bool
+	}{
+		{{ range .Tests.Find }}{
+			name: "{{ .Name }}",
+			args: args{
+				s: []{{ $.Type }}{{ .In }},
+				f: func(x {{ $.Type }}) bool {{ .Func }},
+			},
+			want: {{ .Out }},
+			found: {{ .Found }},
+		},{{ end }}
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got1 *{{ .Type }} = {{ .Package }}.Find(tt.args.s, tt.args.f)
+			var got2 *{{ .Type }} = {{ .Package }}.New(tt.args.s).Find(tt.args.f)
+			if tt.found {
+				assert.Equal(t, &tt.want, got1)
+				assert.Equal(t, &tt.want, got2)
+			} else {
+				assert.Nil(t, got1)
+				assert.Nil(t, got2)
+			}
+		})
+	}
+}{{ end }}
 {{ end }}`))

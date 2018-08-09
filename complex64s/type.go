@@ -138,3 +138,48 @@ func Intersect(s []complex64, more ...[]complex64) Complex64s {
 func (s Complex64s) Intersect(more ...[]complex64) Complex64s {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []complex64, x complex64) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Complex64s) Contains(x complex64) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []complex64, x complex64) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Complex64s) IndexOf(x complex64) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []complex64, f func(complex64) bool) *complex64 {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Complex64s) Find(f func(complex64) bool) *complex64 {
+	return Find(s, f)
+}

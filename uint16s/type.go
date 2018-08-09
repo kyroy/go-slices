@@ -138,3 +138,48 @@ func Intersect(s []uint16, more ...[]uint16) Uint16s {
 func (s Uint16s) Intersect(more ...[]uint16) Uint16s {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []uint16, x uint16) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Uint16s) Contains(x uint16) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []uint16, x uint16) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Uint16s) IndexOf(x uint16) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []uint16, f func(uint16) bool) *uint16 {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Uint16s) Find(f func(uint16) bool) *uint16 {
+	return Find(s, f)
+}

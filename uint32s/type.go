@@ -138,3 +138,48 @@ func Intersect(s []uint32, more ...[]uint32) Uint32s {
 func (s Uint32s) Intersect(more ...[]uint32) Uint32s {
 	return Intersect(s, more...)
 }
+
+// Contains returns true if the element is found in the slice.
+func Contains(s []uint32, x uint32) bool {
+	for _, e := range s {
+		if e == x {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains returns true if the element is found in the slice.
+func (s Uint32s) Contains(x uint32) bool {
+	return Contains(s, x)
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func IndexOf(s []uint32, x uint32) int {
+	for i, e := range s {
+		if e == x {
+			return i
+		}
+	}
+	return -1
+}
+
+// IndexOf returns the position of the first occurrence of the specified value.
+func (s Uint32s) IndexOf(x uint32) int {
+	return IndexOf(s, x)
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func Find(s []uint32, f func(uint32) bool) *uint32 {
+	for _, e := range s {
+		if f(e) {
+			return &e
+		}
+	}
+	return nil
+}
+
+// Find returns the first element that passes the test implemented by the provided function.
+func (s Uint32s) Find(f func(uint32) bool) *uint32 {
+	return Find(s, f)
+}

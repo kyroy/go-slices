@@ -176,3 +176,119 @@ func TestIntersect(t *testing.T) {
 		})
 	}
 }
+
+func TestContains(t *testing.T) {
+	type args struct {
+		s []rune
+		x rune
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []rune{1, 2, 3, 4},
+				x: 3,
+			},
+			want: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []rune{1, 1, 2, 1, 3, 5, 4},
+				x: 0,
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got bool = runes.Contains(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = runes.New(tt.args.s).Contains(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestIndexOf(t *testing.T) {
+	type args struct {
+		s []rune
+		x rune
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []rune{1, 2, 3, 4},
+				x: 3,
+			},
+			want: 2,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []rune{1, 1, 2, 1, 3, 5, 4},
+				x: 0,
+			},
+			want: -1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got int = runes.IndexOf(tt.args.s, tt.args.x)
+			assert.Equal(t, tt.want, got)
+			got = runes.New(tt.args.s).IndexOf(tt.args.x)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
+
+func TestFind(t *testing.T) {
+	type args struct {
+		s []rune
+		f func(rune) bool
+	}
+	tests := []struct {
+		name string
+		args args
+		want rune
+		found bool
+	}{
+		{
+			name: "contains",
+			args: args{
+				s: []rune{1, 2, 3, 4, 2},
+				f: func(x rune) bool { return x > 1 && x < 4 },
+			},
+			want: 2,
+			found: true,
+		},{
+			name: "not_contains",
+			args: args{
+				s: []rune{1, 2, 3, 4, 2},
+				f: func(x rune) bool { return x > 5 },
+			},
+			want: 0,
+			found: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got1 *rune = runes.Find(tt.args.s, tt.args.f)
+			var got2 *rune = runes.New(tt.args.s).Find(tt.args.f)
+			if tt.found {
+				assert.Equal(t, &tt.want, got1)
+				assert.Equal(t, &tt.want, got2)
+			} else {
+				assert.Nil(t, got1)
+				assert.Nil(t, got2)
+			}
+		})
+	}
+}
