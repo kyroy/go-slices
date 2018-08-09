@@ -55,7 +55,7 @@ func (s Complex128s) Filter(f func(s complex128) bool) Complex128s {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []complex128, f func(sum, value complex128) complex128, neutral complex128) complex128 {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []complex128, f func(sum, value complex128) complex128, neutral co
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Complex128s) Reduce(f func(sum, value complex128) complex128, neutral complex128) complex128 {
 	return Reduce(s, f, neutral)
 }

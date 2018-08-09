@@ -55,7 +55,7 @@ func (s Bytes) Filter(f func(s byte) bool) Bytes {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []byte, f func(sum, value byte) byte, neutral byte) byte {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []byte, f func(sum, value byte) byte, neutral byte) byte {
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Bytes) Reduce(f func(sum, value byte) byte, neutral byte) byte {
 	return Reduce(s, f, neutral)
 }

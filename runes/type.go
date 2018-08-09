@@ -55,7 +55,7 @@ func (s Runes) Filter(f func(s rune) bool) Runes {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []rune, f func(sum, value rune) rune, neutral rune) rune {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []rune, f func(sum, value rune) rune, neutral rune) rune {
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Runes) Reduce(f func(sum, value rune) rune, neutral rune) rune {
 	return Reduce(s, f, neutral)
 }

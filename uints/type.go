@@ -55,7 +55,7 @@ func (s Uints) Filter(f func(s uint) bool) Uints {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []uint, f func(sum, value uint) uint, neutral uint) uint {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []uint, f func(sum, value uint) uint, neutral uint) uint {
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Uints) Reduce(f func(sum, value uint) uint, neutral uint) uint {
 	return Reduce(s, f, neutral)
 }

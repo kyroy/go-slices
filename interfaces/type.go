@@ -55,7 +55,7 @@ func (s Interfaces) Filter(f func(s interface{}) bool) Interfaces {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []interface{}, f func(sum, value interface{}) interface{}, neutral interface{}) interface{} {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []interface{}, f func(sum, value interface{}) interface{}, neutral
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Interfaces) Reduce(f func(sum, value interface{}) interface{}, neutral interface{}) interface{} {
 	return Reduce(s, f, neutral)
 }

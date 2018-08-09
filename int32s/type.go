@@ -55,7 +55,7 @@ func (s Int32s) Filter(f func(s int32) bool) Int32s {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []int32, f func(sum, value int32) int32, neutral int32) int32 {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []int32, f func(sum, value int32) int32, neutral int32) int32 {
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Int32s) Reduce(f func(sum, value int32) int32, neutral int32) int32 {
 	return Reduce(s, f, neutral)
 }

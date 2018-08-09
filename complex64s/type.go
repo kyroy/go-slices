@@ -55,7 +55,7 @@ func (s Complex64s) Filter(f func(s complex64) bool) Complex64s {
 	return Filter(s, f)
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the array (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 func Reduce(s []complex64, f func(sum, value complex64) complex64, neutral complex64) complex64 {
 	res := neutral
 	for _, e := range s {
@@ -64,7 +64,7 @@ func Reduce(s []complex64, f func(sum, value complex64) complex64, neutral compl
 	return res
 }
 
-// Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
+// Reduce applies the provided function against an accumulator and each element in the slice (from left to right) to reduce it to a single value.
 func (s Complex64s) Reduce(f func(sum, value complex64) complex64, neutral complex64) complex64 {
 	return Reduce(s, f, neutral)
 }
