@@ -1,0 +1,48 @@
+types:
+- package: bools
+  type: bool
+tests:
+  map:
+  - name: basic
+    in: '{true, false, true}'
+    func: '{ return !x }'
+    out: '{false, true, false}'
+  filter:
+  - name: basic
+    in: '{true, false, true}'
+    func: '{ return x }'
+    out: '{true, true}'
+  reduce:
+  - name: and_false
+    in: '{true, false, true}'
+    func: '{ return sum && value }'
+    neutral: 'true'
+    out: 'false'
+  - name: and_true
+    in: '{true, true, true}'
+    func: '{ return sum && value }'
+    neutral: 'true'
+    out: 'true'
+  - name: or_true
+    in: '{false, false, true}'
+    func: '{ return sum || value }'
+    neutral: 'false'
+    out: 'true'
+  - name: or_false
+    in: '{false, false, false}'
+    func: '{ return sum || value }'
+    neutral: 'false'
+    out: 'false'
+  unique:
+  - name: basic
+    in: '{false, false, true, true}'
+    out: '{false, true}'
+  intersect:
+  - name: same
+    in: '{false, true, false}'
+    more: '{{false, true, false}}'
+    out: '{false, true, false}'
+  - name: multiple
+    in: '{false, true, false, true}'
+    more: '{{false, true, false, false}, {false, true, false, true, false}}'
+    out: '{false, true, false}'

@@ -1,0 +1,40 @@
+types:
+- package: strings
+  type: string
+examples:
+  Map:
+    in: |-
+      ([]<TYPE>{"a", "b"}, func(s <TYPE>) <TYPE> {
+            return s + "!"
+          })
+    out: '[a! b!]'
+tests:
+  map:
+  - name: basic
+    in: '{"a", "b", "c", "d"}'
+    func: '{ return x + "!" }'
+    out: '{"a!", "b!", "c!", "d!"}'
+  filter:
+  - name: basic
+    in: '{"a", "b", "c", "d"}'
+    func: '{ return x > "b" }'
+    out: '{"c", "d"}'
+  reduce:
+  - name: basic
+    in: '{"a", "b", "c", "d"}'
+    func: '{ return sum + value }'
+    neutral: '""'
+    out: '"abcd"'
+  unique:
+  - name: basic
+    in: '{"a", "b", "a", "c", "c", "d"}'
+    out: '{"a", "b", "c", "d"}'
+  intersect:
+  - name: same
+    in: '{"a", "b", "c", "a"}'
+    more: '{{"a", "b", "c", "a"}}'
+    out: '{"a", "b", "c", "a"}'
+  - name: multiple
+    in: '{"a", "b", "c", "a"}'
+    more: '{{"a", "b", "a"}, {"b", "a"}}'
+    out: '{"a", "b"}'

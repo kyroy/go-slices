@@ -1,0 +1,10 @@
+types:
+# the set of all complex numbers with float32 real and imaginary parts
+- package: complex64s
+  type: complex64
+# the set of all complex numbers with float64 real and imaginary parts
+- package: complex128s
+  type: complex128
+# an unsigned integer large enough to store the uninterpreted bits of a pointer value
+- package: uintptrs
+  type: uintptr

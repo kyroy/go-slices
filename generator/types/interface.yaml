@@ -1,0 +1,33 @@
+types:
+- package: interfaces
+  type: interface{}
+tests:
+  map:
+  - name: basic
+    in: '{"a", 1, "1", 2}'
+    func: '{ switch a := x.(type) { case string: return a + "!"; case int: return a + 1; default: return a } }'
+    out: '{"a!", 2, "1!", 3}'
+  filter:
+  - name: basic
+    in: '{"a", 1, "1", 2}'
+    func: '{ switch x.(type) { case string: return true; default: return false } }'
+    out: '{"a", "1"}'
+  reduce:
+  - name: basic
+    in: '{"a", 1, "1", 2}'
+    func: '{ return fmt.Sprint(sum) + fmt.Sprint(value) }'
+    neutral: '""'
+    out: '"a112"'
+  unique:
+  - name: basic
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    out: '{"a", 1, "1", 2}'
+  intersect:
+  - name: same
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    more: '{{"a", 1, "1", 1, 2, "a"}}'
+    out: '{"a", 1, "1", 1, 2, "a"}'
+  - name: multiple
+    in: '{"a", 1, "1", 1, 2, "a"}'
+    more: '{{"a", 1, "1"}, {"1", 1}}'
+    out: '{1, "1"}'

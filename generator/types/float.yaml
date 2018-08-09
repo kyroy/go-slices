@@ -1,0 +1,44 @@
+types:
+# the set of all IEEE-754 32-bit floating-point numbers
+- package: float32s
+  type: float32
+# the set of all IEEE-754 64-bit floating-point numbers
+- package: float64s
+  type: float64
+examples:
+  Map:
+    in: |-
+      ([]<TYPE>{1, 2, 3}, func(x <TYPE>) <TYPE> {
+            return 2 * x
+          })
+    out: '[2 4 6]'
+tests:
+  map:
+  - name: basic
+    in: '{1, 3, 4, 6}'
+    func: '{ return x + 1 }'
+    out: '{2, 4, 5, 7}'
+  filter:
+  - name: basic
+    in: '{1, 2, 3, 4, 2}'
+    func: '{ return x > 1 && x < 4 }'
+    out: '{2, 3, 2}'
+  reduce:
+  - name: basic
+    in: '{1, 3, 4}'
+    func: '{ return sum + value }'
+    neutral: '0'
+    out: '8'
+  unique:
+  - name: basic
+    in: '{1, 3, 4, 6, 3, 2, 1}'
+    out: '{1, 3, 4, 6, 2}'
+  intersect:
+  - name: same
+    in: '{1, 2, 3, 4}'
+    more: '{{1, 2, 3, 4}}'
+    out: '{1, 2, 3, 4}'
+  - name: multiple
+    in: '{1, 1, 2, 1, 3, 5, 4}'
+    more: '{{1, 2, 2, 3, 1}, {1, 2, 1, 5, 4}}'
+    out: '{1, 1, 2}'

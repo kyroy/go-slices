@@ -6,6 +6,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/kyroy/go-slices)](https://goreportcard.com/report/github.com/kyroy/go-slices)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/kyroy/go-slices/blob/master/LICENSE)
 
+A type safe utility library for Go slices, providing contains, find, map, filter, reduce, unique, intersect, indexOf.
+
+```bash
+go get github.com/kyroy/go-slices/...
+```
+
 ## Example using `strings`
 
 ```go
@@ -55,5 +61,5 @@ c reduce     efgh
 
 ## Generating Slices
 ```bash
-go run generator/main.go TYPES.yaml TESTS.yaml
+go run generator/main.go generator/types
 ```
