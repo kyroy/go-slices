@@ -17,16 +17,17 @@
 // Package bytes provides typical slice functions for the type byte.
 package bytes
 
-type bytes []byte
+// Bytes wraps []byte.
+type Bytes []byte
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []byte) bytes {
-	return bytes(s)
+func New(s []byte) Bytes {
+	return Bytes(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []byte, f func(s byte) byte) bytes {
-	m := bytes(make([]byte, len(s)))
+func Map(s []byte, f func(s byte) byte) Bytes {
+	m := Bytes(make([]byte, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []byte, f func(s byte) byte) bytes {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s bytes) Map(f func(s byte) byte) bytes {
+func (s Bytes) Map(f func(s byte) byte) Bytes {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []byte, f func(s byte) bool) bytes {
-	m := bytes(make([]byte, 0, len(s)))
+func Filter(s []byte, f func(s byte) bool) Bytes {
+	m := Bytes(make([]byte, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []byte, f func(s byte) bool) bytes {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s bytes) Filter(f func(s byte) bool) bytes {
+func (s Bytes) Filter(f func(s byte) bool) Bytes {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []byte, f func(sum, value byte) byte, neutral byte) byte {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s bytes) Reduce(f func(sum, value byte) byte, neutral byte) byte {
+func (s Bytes) Reduce(f func(sum, value byte) byte, neutral byte) byte {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []byte) bytes {
-	m := bytes(make([]byte, 0, len(s)))
+func Unique(s []byte) Bytes {
+	m := Bytes(make([]byte, 0, len(s)))
 	seen := make(map[byte]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []byte) bytes {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s bytes) Unique() bytes {
+func (s Bytes) Unique() Bytes {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []byte, more ...[]byte) bytes {
+func Intersect(s []byte, more ...[]byte) Bytes {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []byte, more ...[]byte) bytes {
 			}
 		}
 	}
-	var m bytes
+	var m Bytes
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []byte, more ...[]byte) bytes {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s bytes) Intersect(more ...[]byte) bytes {
+func (s Bytes) Intersect(more ...[]byte) Bytes {
 	return Intersect(s, more...)
 }

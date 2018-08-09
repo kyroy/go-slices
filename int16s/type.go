@@ -17,16 +17,17 @@
 // Package int16s provides typical slice functions for the type int16.
 package int16s
 
-type int16s []int16
+// Int16s wraps []int16.
+type Int16s []int16
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []int16) int16s {
-	return int16s(s)
+func New(s []int16) Int16s {
+	return Int16s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []int16, f func(s int16) int16) int16s {
-	m := int16s(make([]int16, len(s)))
+func Map(s []int16, f func(s int16) int16) Int16s {
+	m := Int16s(make([]int16, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []int16, f func(s int16) int16) int16s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s int16s) Map(f func(s int16) int16) int16s {
+func (s Int16s) Map(f func(s int16) int16) Int16s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []int16, f func(s int16) bool) int16s {
-	m := int16s(make([]int16, 0, len(s)))
+func Filter(s []int16, f func(s int16) bool) Int16s {
+	m := Int16s(make([]int16, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []int16, f func(s int16) bool) int16s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s int16s) Filter(f func(s int16) bool) int16s {
+func (s Int16s) Filter(f func(s int16) bool) Int16s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []int16, f func(sum, value int16) int16, neutral int16) int16 {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s int16s) Reduce(f func(sum, value int16) int16, neutral int16) int16 {
+func (s Int16s) Reduce(f func(sum, value int16) int16, neutral int16) int16 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []int16) int16s {
-	m := int16s(make([]int16, 0, len(s)))
+func Unique(s []int16) Int16s {
+	m := Int16s(make([]int16, 0, len(s)))
 	seen := make(map[int16]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []int16) int16s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s int16s) Unique() int16s {
+func (s Int16s) Unique() Int16s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []int16, more ...[]int16) int16s {
+func Intersect(s []int16, more ...[]int16) Int16s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []int16, more ...[]int16) int16s {
 			}
 		}
 	}
-	var m int16s
+	var m Int16s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []int16, more ...[]int16) int16s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s int16s) Intersect(more ...[]int16) int16s {
+func (s Int16s) Intersect(more ...[]int16) Int16s {
 	return Intersect(s, more...)
 }

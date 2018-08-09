@@ -17,16 +17,17 @@
 // Package uints provides typical slice functions for the type uint.
 package uints
 
-type uints []uint
+// Uints wraps []uint.
+type Uints []uint
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []uint) uints {
-	return uints(s)
+func New(s []uint) Uints {
+	return Uints(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []uint, f func(s uint) uint) uints {
-	m := uints(make([]uint, len(s)))
+func Map(s []uint, f func(s uint) uint) Uints {
+	m := Uints(make([]uint, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []uint, f func(s uint) uint) uints {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s uints) Map(f func(s uint) uint) uints {
+func (s Uints) Map(f func(s uint) uint) Uints {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []uint, f func(s uint) bool) uints {
-	m := uints(make([]uint, 0, len(s)))
+func Filter(s []uint, f func(s uint) bool) Uints {
+	m := Uints(make([]uint, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []uint, f func(s uint) bool) uints {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s uints) Filter(f func(s uint) bool) uints {
+func (s Uints) Filter(f func(s uint) bool) Uints {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []uint, f func(sum, value uint) uint, neutral uint) uint {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s uints) Reduce(f func(sum, value uint) uint, neutral uint) uint {
+func (s Uints) Reduce(f func(sum, value uint) uint, neutral uint) uint {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []uint) uints {
-	m := uints(make([]uint, 0, len(s)))
+func Unique(s []uint) Uints {
+	m := Uints(make([]uint, 0, len(s)))
 	seen := make(map[uint]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []uint) uints {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s uints) Unique() uints {
+func (s Uints) Unique() Uints {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []uint, more ...[]uint) uints {
+func Intersect(s []uint, more ...[]uint) Uints {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []uint, more ...[]uint) uints {
 			}
 		}
 	}
-	var m uints
+	var m Uints
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []uint, more ...[]uint) uints {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s uints) Intersect(more ...[]uint) uints {
+func (s Uints) Intersect(more ...[]uint) Uints {
 	return Intersect(s, more...)
 }

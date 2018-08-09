@@ -17,16 +17,17 @@
 // Package int8s provides typical slice functions for the type int8.
 package int8s
 
-type int8s []int8
+// Int8s wraps []int8.
+type Int8s []int8
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []int8) int8s {
-	return int8s(s)
+func New(s []int8) Int8s {
+	return Int8s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []int8, f func(s int8) int8) int8s {
-	m := int8s(make([]int8, len(s)))
+func Map(s []int8, f func(s int8) int8) Int8s {
+	m := Int8s(make([]int8, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []int8, f func(s int8) int8) int8s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s int8s) Map(f func(s int8) int8) int8s {
+func (s Int8s) Map(f func(s int8) int8) Int8s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []int8, f func(s int8) bool) int8s {
-	m := int8s(make([]int8, 0, len(s)))
+func Filter(s []int8, f func(s int8) bool) Int8s {
+	m := Int8s(make([]int8, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []int8, f func(s int8) bool) int8s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s int8s) Filter(f func(s int8) bool) int8s {
+func (s Int8s) Filter(f func(s int8) bool) Int8s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []int8, f func(sum, value int8) int8, neutral int8) int8 {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s int8s) Reduce(f func(sum, value int8) int8, neutral int8) int8 {
+func (s Int8s) Reduce(f func(sum, value int8) int8, neutral int8) int8 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []int8) int8s {
-	m := int8s(make([]int8, 0, len(s)))
+func Unique(s []int8) Int8s {
+	m := Int8s(make([]int8, 0, len(s)))
 	seen := make(map[int8]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []int8) int8s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s int8s) Unique() int8s {
+func (s Int8s) Unique() Int8s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []int8, more ...[]int8) int8s {
+func Intersect(s []int8, more ...[]int8) Int8s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []int8, more ...[]int8) int8s {
 			}
 		}
 	}
-	var m int8s
+	var m Int8s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []int8, more ...[]int8) int8s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s int8s) Intersect(more ...[]int8) int8s {
+func (s Int8s) Intersect(more ...[]int8) Int8s {
 	return Intersect(s, more...)
 }

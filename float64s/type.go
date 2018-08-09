@@ -17,16 +17,17 @@
 // Package float64s provides typical slice functions for the type float64.
 package float64s
 
-type float64s []float64
+// Float64s wraps []float64.
+type Float64s []float64
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []float64) float64s {
-	return float64s(s)
+func New(s []float64) Float64s {
+	return Float64s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []float64, f func(s float64) float64) float64s {
-	m := float64s(make([]float64, len(s)))
+func Map(s []float64, f func(s float64) float64) Float64s {
+	m := Float64s(make([]float64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []float64, f func(s float64) float64) float64s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s float64s) Map(f func(s float64) float64) float64s {
+func (s Float64s) Map(f func(s float64) float64) Float64s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []float64, f func(s float64) bool) float64s {
-	m := float64s(make([]float64, 0, len(s)))
+func Filter(s []float64, f func(s float64) bool) Float64s {
+	m := Float64s(make([]float64, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []float64, f func(s float64) bool) float64s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s float64s) Filter(f func(s float64) bool) float64s {
+func (s Float64s) Filter(f func(s float64) bool) Float64s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []float64, f func(sum, value float64) float64, neutral float64) fl
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s float64s) Reduce(f func(sum, value float64) float64, neutral float64) float64 {
+func (s Float64s) Reduce(f func(sum, value float64) float64, neutral float64) float64 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []float64) float64s {
-	m := float64s(make([]float64, 0, len(s)))
+func Unique(s []float64) Float64s {
+	m := Float64s(make([]float64, 0, len(s)))
 	seen := make(map[float64]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []float64) float64s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s float64s) Unique() float64s {
+func (s Float64s) Unique() Float64s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []float64, more ...[]float64) float64s {
+func Intersect(s []float64, more ...[]float64) Float64s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []float64, more ...[]float64) float64s {
 			}
 		}
 	}
-	var m float64s
+	var m Float64s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []float64, more ...[]float64) float64s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s float64s) Intersect(more ...[]float64) float64s {
+func (s Float64s) Intersect(more ...[]float64) Float64s {
 	return Intersect(s, more...)
 }

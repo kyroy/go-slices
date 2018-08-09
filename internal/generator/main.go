@@ -16,7 +16,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/kyroy/go-slices/generator/internal"
+	"github.com/kyroy/go-slices/internal/generator/templates"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"

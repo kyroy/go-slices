@@ -17,16 +17,17 @@
 // Package complex128s provides typical slice functions for the type complex128.
 package complex128s
 
-type complex128s []complex128
+// Complex128s wraps []complex128.
+type Complex128s []complex128
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []complex128) complex128s {
-	return complex128s(s)
+func New(s []complex128) Complex128s {
+	return Complex128s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []complex128, f func(s complex128) complex128) complex128s {
-	m := complex128s(make([]complex128, len(s)))
+func Map(s []complex128, f func(s complex128) complex128) Complex128s {
+	m := Complex128s(make([]complex128, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []complex128, f func(s complex128) complex128) complex128s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s complex128s) Map(f func(s complex128) complex128) complex128s {
+func (s Complex128s) Map(f func(s complex128) complex128) Complex128s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []complex128, f func(s complex128) bool) complex128s {
-	m := complex128s(make([]complex128, 0, len(s)))
+func Filter(s []complex128, f func(s complex128) bool) Complex128s {
+	m := Complex128s(make([]complex128, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []complex128, f func(s complex128) bool) complex128s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s complex128s) Filter(f func(s complex128) bool) complex128s {
+func (s Complex128s) Filter(f func(s complex128) bool) Complex128s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []complex128, f func(sum, value complex128) complex128, neutral co
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s complex128s) Reduce(f func(sum, value complex128) complex128, neutral complex128) complex128 {
+func (s Complex128s) Reduce(f func(sum, value complex128) complex128, neutral complex128) complex128 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []complex128) complex128s {
-	m := complex128s(make([]complex128, 0, len(s)))
+func Unique(s []complex128) Complex128s {
+	m := Complex128s(make([]complex128, 0, len(s)))
 	seen := make(map[complex128]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []complex128) complex128s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s complex128s) Unique() complex128s {
+func (s Complex128s) Unique() Complex128s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []complex128, more ...[]complex128) complex128s {
+func Intersect(s []complex128, more ...[]complex128) Complex128s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []complex128, more ...[]complex128) complex128s {
 			}
 		}
 	}
-	var m complex128s
+	var m Complex128s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []complex128, more ...[]complex128) complex128s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s complex128s) Intersect(more ...[]complex128) complex128s {
+func (s Complex128s) Intersect(more ...[]complex128) Complex128s {
 	return Intersect(s, more...)
 }

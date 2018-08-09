@@ -17,16 +17,17 @@
 // Package interfaces provides typical slice functions for the type interface{}.
 package interfaces
 
-type interfaces []interface{}
+// Interfaces wraps []interface{}.
+type Interfaces []interface{}
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []interface{}) interfaces {
-	return interfaces(s)
+func New(s []interface{}) Interfaces {
+	return Interfaces(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []interface{}, f func(s interface{}) interface{}) interfaces {
-	m := interfaces(make([]interface{}, len(s)))
+func Map(s []interface{}, f func(s interface{}) interface{}) Interfaces {
+	m := Interfaces(make([]interface{}, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []interface{}, f func(s interface{}) interface{}) interfaces {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s interfaces) Map(f func(s interface{}) interface{}) interfaces {
+func (s Interfaces) Map(f func(s interface{}) interface{}) Interfaces {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []interface{}, f func(s interface{}) bool) interfaces {
-	m := interfaces(make([]interface{}, 0, len(s)))
+func Filter(s []interface{}, f func(s interface{}) bool) Interfaces {
+	m := Interfaces(make([]interface{}, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []interface{}, f func(s interface{}) bool) interfaces {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s interfaces) Filter(f func(s interface{}) bool) interfaces {
+func (s Interfaces) Filter(f func(s interface{}) bool) Interfaces {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []interface{}, f func(sum, value interface{}) interface{}, neutral
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s interfaces) Reduce(f func(sum, value interface{}) interface{}, neutral interface{}) interface{} {
+func (s Interfaces) Reduce(f func(sum, value interface{}) interface{}, neutral interface{}) interface{} {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []interface{}) interfaces {
-	m := interfaces(make([]interface{}, 0, len(s)))
+func Unique(s []interface{}) Interfaces {
+	m := Interfaces(make([]interface{}, 0, len(s)))
 	seen := make(map[interface{}]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []interface{}) interfaces {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s interfaces) Unique() interfaces {
+func (s Interfaces) Unique() Interfaces {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []interface{}, more ...[]interface{}) interfaces {
+func Intersect(s []interface{}, more ...[]interface{}) Interfaces {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []interface{}, more ...[]interface{}) interfaces {
 			}
 		}
 	}
-	var m interfaces
+	var m Interfaces
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []interface{}, more ...[]interface{}) interfaces {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s interfaces) Intersect(more ...[]interface{}) interfaces {
+func (s Interfaces) Intersect(more ...[]interface{}) Interfaces {
 	return Intersect(s, more...)
 }

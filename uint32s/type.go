@@ -17,16 +17,17 @@
 // Package uint32s provides typical slice functions for the type uint32.
 package uint32s
 
-type uint32s []uint32
+// Uint32s wraps []uint32.
+type Uint32s []uint32
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []uint32) uint32s {
-	return uint32s(s)
+func New(s []uint32) Uint32s {
+	return Uint32s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []uint32, f func(s uint32) uint32) uint32s {
-	m := uint32s(make([]uint32, len(s)))
+func Map(s []uint32, f func(s uint32) uint32) Uint32s {
+	m := Uint32s(make([]uint32, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []uint32, f func(s uint32) uint32) uint32s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s uint32s) Map(f func(s uint32) uint32) uint32s {
+func (s Uint32s) Map(f func(s uint32) uint32) Uint32s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []uint32, f func(s uint32) bool) uint32s {
-	m := uint32s(make([]uint32, 0, len(s)))
+func Filter(s []uint32, f func(s uint32) bool) Uint32s {
+	m := Uint32s(make([]uint32, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []uint32, f func(s uint32) bool) uint32s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s uint32s) Filter(f func(s uint32) bool) uint32s {
+func (s Uint32s) Filter(f func(s uint32) bool) Uint32s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []uint32, f func(sum, value uint32) uint32, neutral uint32) uint32
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s uint32s) Reduce(f func(sum, value uint32) uint32, neutral uint32) uint32 {
+func (s Uint32s) Reduce(f func(sum, value uint32) uint32, neutral uint32) uint32 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []uint32) uint32s {
-	m := uint32s(make([]uint32, 0, len(s)))
+func Unique(s []uint32) Uint32s {
+	m := Uint32s(make([]uint32, 0, len(s)))
 	seen := make(map[uint32]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []uint32) uint32s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s uint32s) Unique() uint32s {
+func (s Uint32s) Unique() Uint32s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []uint32, more ...[]uint32) uint32s {
+func Intersect(s []uint32, more ...[]uint32) Uint32s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []uint32, more ...[]uint32) uint32s {
 			}
 		}
 	}
-	var m uint32s
+	var m Uint32s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []uint32, more ...[]uint32) uint32s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s uint32s) Intersect(more ...[]uint32) uint32s {
+func (s Uint32s) Intersect(more ...[]uint32) Uint32s {
 	return Intersect(s, more...)
 }

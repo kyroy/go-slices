@@ -17,16 +17,17 @@
 // Package strings provides typical slice functions for the type string.
 package strings
 
-type strings []string
+// Strings wraps []string.
+type Strings []string
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []string) strings {
-	return strings(s)
+func New(s []string) Strings {
+	return Strings(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []string, f func(s string) string) strings {
-	m := strings(make([]string, len(s)))
+func Map(s []string, f func(s string) string) Strings {
+	m := Strings(make([]string, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []string, f func(s string) string) strings {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s strings) Map(f func(s string) string) strings {
+func (s Strings) Map(f func(s string) string) Strings {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []string, f func(s string) bool) strings {
-	m := strings(make([]string, 0, len(s)))
+func Filter(s []string, f func(s string) bool) Strings {
+	m := Strings(make([]string, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []string, f func(s string) bool) strings {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s strings) Filter(f func(s string) bool) strings {
+func (s Strings) Filter(f func(s string) bool) Strings {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []string, f func(sum, value string) string, neutral string) string
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s strings) Reduce(f func(sum, value string) string, neutral string) string {
+func (s Strings) Reduce(f func(sum, value string) string, neutral string) string {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []string) strings {
-	m := strings(make([]string, 0, len(s)))
+func Unique(s []string) Strings {
+	m := Strings(make([]string, 0, len(s)))
 	seen := make(map[string]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []string) strings {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s strings) Unique() strings {
+func (s Strings) Unique() Strings {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []string, more ...[]string) strings {
+func Intersect(s []string, more ...[]string) Strings {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []string, more ...[]string) strings {
 			}
 		}
 	}
-	var m strings
+	var m Strings
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []string, more ...[]string) strings {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s strings) Intersect(more ...[]string) strings {
+func (s Strings) Intersect(more ...[]string) Strings {
 	return Intersect(s, more...)
 }

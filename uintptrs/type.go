@@ -17,16 +17,17 @@
 // Package uintptrs provides typical slice functions for the type uintptr.
 package uintptrs
 
-type uintptrs []uintptr
+// Uintptrs wraps []uintptr.
+type Uintptrs []uintptr
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []uintptr) uintptrs {
-	return uintptrs(s)
+func New(s []uintptr) Uintptrs {
+	return Uintptrs(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []uintptr, f func(s uintptr) uintptr) uintptrs {
-	m := uintptrs(make([]uintptr, len(s)))
+func Map(s []uintptr, f func(s uintptr) uintptr) Uintptrs {
+	m := Uintptrs(make([]uintptr, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []uintptr, f func(s uintptr) uintptr) uintptrs {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s uintptrs) Map(f func(s uintptr) uintptr) uintptrs {
+func (s Uintptrs) Map(f func(s uintptr) uintptr) Uintptrs {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []uintptr, f func(s uintptr) bool) uintptrs {
-	m := uintptrs(make([]uintptr, 0, len(s)))
+func Filter(s []uintptr, f func(s uintptr) bool) Uintptrs {
+	m := Uintptrs(make([]uintptr, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []uintptr, f func(s uintptr) bool) uintptrs {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s uintptrs) Filter(f func(s uintptr) bool) uintptrs {
+func (s Uintptrs) Filter(f func(s uintptr) bool) Uintptrs {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []uintptr, f func(sum, value uintptr) uintptr, neutral uintptr) ui
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s uintptrs) Reduce(f func(sum, value uintptr) uintptr, neutral uintptr) uintptr {
+func (s Uintptrs) Reduce(f func(sum, value uintptr) uintptr, neutral uintptr) uintptr {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []uintptr) uintptrs {
-	m := uintptrs(make([]uintptr, 0, len(s)))
+func Unique(s []uintptr) Uintptrs {
+	m := Uintptrs(make([]uintptr, 0, len(s)))
 	seen := make(map[uintptr]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []uintptr) uintptrs {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s uintptrs) Unique() uintptrs {
+func (s Uintptrs) Unique() Uintptrs {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []uintptr, more ...[]uintptr) uintptrs {
+func Intersect(s []uintptr, more ...[]uintptr) Uintptrs {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []uintptr, more ...[]uintptr) uintptrs {
 			}
 		}
 	}
-	var m uintptrs
+	var m Uintptrs
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []uintptr, more ...[]uintptr) uintptrs {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s uintptrs) Intersect(more ...[]uintptr) uintptrs {
+func (s Uintptrs) Intersect(more ...[]uintptr) Uintptrs {
 	return Intersect(s, more...)
 }

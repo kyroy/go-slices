@@ -17,16 +17,17 @@
 // Package runes provides typical slice functions for the type rune.
 package runes
 
-type runes []rune
+// Runes wraps []rune.
+type Runes []rune
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []rune) runes {
-	return runes(s)
+func New(s []rune) Runes {
+	return Runes(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []rune, f func(s rune) rune) runes {
-	m := runes(make([]rune, len(s)))
+func Map(s []rune, f func(s rune) rune) Runes {
+	m := Runes(make([]rune, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []rune, f func(s rune) rune) runes {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s runes) Map(f func(s rune) rune) runes {
+func (s Runes) Map(f func(s rune) rune) Runes {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []rune, f func(s rune) bool) runes {
-	m := runes(make([]rune, 0, len(s)))
+func Filter(s []rune, f func(s rune) bool) Runes {
+	m := Runes(make([]rune, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []rune, f func(s rune) bool) runes {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s runes) Filter(f func(s rune) bool) runes {
+func (s Runes) Filter(f func(s rune) bool) Runes {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []rune, f func(sum, value rune) rune, neutral rune) rune {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s runes) Reduce(f func(sum, value rune) rune, neutral rune) rune {
+func (s Runes) Reduce(f func(sum, value rune) rune, neutral rune) rune {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []rune) runes {
-	m := runes(make([]rune, 0, len(s)))
+func Unique(s []rune) Runes {
+	m := Runes(make([]rune, 0, len(s)))
 	seen := make(map[rune]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []rune) runes {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s runes) Unique() runes {
+func (s Runes) Unique() Runes {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []rune, more ...[]rune) runes {
+func Intersect(s []rune, more ...[]rune) Runes {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []rune, more ...[]rune) runes {
 			}
 		}
 	}
-	var m runes
+	var m Runes
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []rune, more ...[]rune) runes {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s runes) Intersect(more ...[]rune) runes {
+func (s Runes) Intersect(more ...[]rune) Runes {
 	return Intersect(s, more...)
 }

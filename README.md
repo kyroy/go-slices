@@ -61,5 +61,5 @@ c reduce     efgh
 
 ## Generating Slices
 ```bash
-go run generator/main.go generator/types
+go run internal/generator/main.go internal/generator/types
 ```

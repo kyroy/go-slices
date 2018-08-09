@@ -17,16 +17,17 @@
 // Package bools provides typical slice functions for the type bool.
 package bools
 
-type bools []bool
+// Bools wraps []bool.
+type Bools []bool
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []bool) bools {
-	return bools(s)
+func New(s []bool) Bools {
+	return Bools(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []bool, f func(s bool) bool) bools {
-	m := bools(make([]bool, len(s)))
+func Map(s []bool, f func(s bool) bool) Bools {
+	m := Bools(make([]bool, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []bool, f func(s bool) bool) bools {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s bools) Map(f func(s bool) bool) bools {
+func (s Bools) Map(f func(s bool) bool) Bools {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []bool, f func(s bool) bool) bools {
-	m := bools(make([]bool, 0, len(s)))
+func Filter(s []bool, f func(s bool) bool) Bools {
+	m := Bools(make([]bool, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []bool, f func(s bool) bool) bools {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s bools) Filter(f func(s bool) bool) bools {
+func (s Bools) Filter(f func(s bool) bool) Bools {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []bool, f func(sum, value bool) bool, neutral bool) bool {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s bools) Reduce(f func(sum, value bool) bool, neutral bool) bool {
+func (s Bools) Reduce(f func(sum, value bool) bool, neutral bool) bool {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []bool) bools {
-	m := bools(make([]bool, 0, len(s)))
+func Unique(s []bool) Bools {
+	m := Bools(make([]bool, 0, len(s)))
 	seen := make(map[bool]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []bool) bools {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s bools) Unique() bools {
+func (s Bools) Unique() Bools {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []bool, more ...[]bool) bools {
+func Intersect(s []bool, more ...[]bool) Bools {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []bool, more ...[]bool) bools {
 			}
 		}
 	}
-	var m bools
+	var m Bools
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []bool, more ...[]bool) bools {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s bools) Intersect(more ...[]bool) bools {
+func (s Bools) Intersect(more ...[]bool) Bools {
 	return Intersect(s, more...)
 }

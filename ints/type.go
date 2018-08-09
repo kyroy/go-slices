@@ -17,16 +17,17 @@
 // Package ints provides typical slice functions for the type int.
 package ints
 
-type ints []int
+// Ints wraps []int.
+type Ints []int
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []int) ints {
-	return ints(s)
+func New(s []int) Ints {
+	return Ints(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []int, f func(s int) int) ints {
-	m := ints(make([]int, len(s)))
+func Map(s []int, f func(s int) int) Ints {
+	m := Ints(make([]int, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []int, f func(s int) int) ints {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s ints) Map(f func(s int) int) ints {
+func (s Ints) Map(f func(s int) int) Ints {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []int, f func(s int) bool) ints {
-	m := ints(make([]int, 0, len(s)))
+func Filter(s []int, f func(s int) bool) Ints {
+	m := Ints(make([]int, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []int, f func(s int) bool) ints {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s ints) Filter(f func(s int) bool) ints {
+func (s Ints) Filter(f func(s int) bool) Ints {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []int, f func(sum, value int) int, neutral int) int {
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s ints) Reduce(f func(sum, value int) int, neutral int) int {
+func (s Ints) Reduce(f func(sum, value int) int, neutral int) int {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []int) ints {
-	m := ints(make([]int, 0, len(s)))
+func Unique(s []int) Ints {
+	m := Ints(make([]int, 0, len(s)))
 	seen := make(map[int]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []int) ints {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s ints) Unique() ints {
+func (s Ints) Unique() Ints {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []int, more ...[]int) ints {
+func Intersect(s []int, more ...[]int) Ints {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []int, more ...[]int) ints {
 			}
 		}
 	}
-	var m ints
+	var m Ints
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []int, more ...[]int) ints {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s ints) Intersect(more ...[]int) ints {
+func (s Ints) Intersect(more ...[]int) Ints {
 	return Intersect(s, more...)
 }

@@ -17,16 +17,17 @@
 // Package complex64s provides typical slice functions for the type complex64.
 package complex64s
 
-type complex64s []complex64
+// Complex64s wraps []complex64.
+type Complex64s []complex64
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []complex64) complex64s {
-	return complex64s(s)
+func New(s []complex64) Complex64s {
+	return Complex64s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []complex64, f func(s complex64) complex64) complex64s {
-	m := complex64s(make([]complex64, len(s)))
+func Map(s []complex64, f func(s complex64) complex64) Complex64s {
+	m := Complex64s(make([]complex64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []complex64, f func(s complex64) complex64) complex64s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s complex64s) Map(f func(s complex64) complex64) complex64s {
+func (s Complex64s) Map(f func(s complex64) complex64) Complex64s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []complex64, f func(s complex64) bool) complex64s {
-	m := complex64s(make([]complex64, 0, len(s)))
+func Filter(s []complex64, f func(s complex64) bool) Complex64s {
+	m := Complex64s(make([]complex64, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []complex64, f func(s complex64) bool) complex64s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s complex64s) Filter(f func(s complex64) bool) complex64s {
+func (s Complex64s) Filter(f func(s complex64) bool) Complex64s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []complex64, f func(sum, value complex64) complex64, neutral compl
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s complex64s) Reduce(f func(sum, value complex64) complex64, neutral complex64) complex64 {
+func (s Complex64s) Reduce(f func(sum, value complex64) complex64, neutral complex64) complex64 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []complex64) complex64s {
-	m := complex64s(make([]complex64, 0, len(s)))
+func Unique(s []complex64) Complex64s {
+	m := Complex64s(make([]complex64, 0, len(s)))
 	seen := make(map[complex64]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []complex64) complex64s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s complex64s) Unique() complex64s {
+func (s Complex64s) Unique() Complex64s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []complex64, more ...[]complex64) complex64s {
+func Intersect(s []complex64, more ...[]complex64) Complex64s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []complex64, more ...[]complex64) complex64s {
 			}
 		}
 	}
-	var m complex64s
+	var m Complex64s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []complex64, more ...[]complex64) complex64s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s complex64s) Intersect(more ...[]complex64) complex64s {
+func (s Complex64s) Intersect(more ...[]complex64) Complex64s {
 	return Intersect(s, more...)
 }

@@ -17,16 +17,17 @@
 // Package float32s provides typical slice functions for the type float32.
 package float32s
 
-type float32s []float32
+// Float32s wraps []float32.
+type Float32s []float32
 
 // New is a convenient function that wraps the given slice to be able to call the struct package functions directly.
-func New(s []float32) float32s {
-	return float32s(s)
+func New(s []float32) Float32s {
+	return Float32s(s)
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func Map(s []float32, f func(s float32) float32) float32s {
-	m := float32s(make([]float32, len(s)))
+func Map(s []float32, f func(s float32) float32) Float32s {
+	m := Float32s(make([]float32, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
 	}
@@ -34,13 +35,13 @@ func Map(s []float32, f func(s float32) float32) float32s {
 }
 
 // Map creates a new slice with the results of calling the provided function on every element in the calling array.
-func (s float32s) Map(f func(s float32) float32) float32s {
+func (s Float32s) Map(f func(s float32) float32) Float32s {
 	return Map(s, f)
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func Filter(s []float32, f func(s float32) bool) float32s {
-	m := float32s(make([]float32, 0, len(s)))
+func Filter(s []float32, f func(s float32) bool) Float32s {
+	m := Float32s(make([]float32, 0, len(s)))
 	for _, v := range s {
 		if f(v) {
 			m = append(m, v)
@@ -50,7 +51,7 @@ func Filter(s []float32, f func(s float32) bool) float32s {
 }
 
 // Filter creates a new slice with all elements that pass the test implemented by the provided function.
-func (s float32s) Filter(f func(s float32) bool) float32s {
+func (s Float32s) Filter(f func(s float32) bool) Float32s {
 	return Filter(s, f)
 }
 
@@ -64,13 +65,13 @@ func Reduce(s []float32, f func(sum, value float32) float32, neutral float32) fl
 }
 
 // Reduce applies the provided function agains an accumulator and each element in the slice (from left to right) to reduce it to a single value.
-func (s float32s) Reduce(f func(sum, value float32) float32, neutral float32) float32 {
+func (s Float32s) Reduce(f func(sum, value float32) float32, neutral float32) float32 {
 	return Reduce(s, f, neutral)
 }
 
 // Unique creates a new slice without duplicate values.
-func Unique(s []float32) float32s {
-	m := float32s(make([]float32, 0, len(s)))
+func Unique(s []float32) Float32s {
+	m := Float32s(make([]float32, 0, len(s)))
 	seen := make(map[float32]struct{})
 	for _, v := range s {
 		if _, ok := seen[v]; !ok {
@@ -82,13 +83,13 @@ func Unique(s []float32) float32s {
 }
 
 // Unique creates a new slice without duplicate values.
-func (s float32s) Unique() float32s {
+func (s Float32s) Unique() Float32s {
 	return Unique(s)
 }
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func Intersect(s []float32, more ...[]float32) float32s {
+func Intersect(s []float32, more ...[]float32) Float32s {
 	type count struct {
 		slices  int
 		maxHits int
@@ -121,7 +122,7 @@ func Intersect(s []float32, more ...[]float32) float32s {
 			}
 		}
 	}
-	var m float32s
+	var m Float32s
 	for e, c := range counts {
 		if c.slices >= len(more)+1 {
 			for i := 0; i < c.maxHits; i++ {
@@ -134,6 +135,6 @@ func Intersect(s []float32, more ...[]float32) float32s {
 
 // Intersect creates a new slice of values that are included in all given arrays.
 // The order of values in the result is random.
-func (s float32s) Intersect(more ...[]float32) float32s {
+func (s Float32s) Intersect(more ...[]float32) Float32s {
 	return Intersect(s, more...)
 }
