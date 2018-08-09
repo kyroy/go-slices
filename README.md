@@ -30,6 +30,9 @@ func main() {
 		return s + "!"
 	})
 	z := strings.Unique(x)
+	fmt.Println("x           ", x)
+	fmt.Println("y filter map", y)
+	fmt.Println("z unique    ", z)
 
 	a := strings.New([]string{"e", "f", "g", "h"})
 	b := a.Filter(func(s string) bool {
@@ -40,10 +43,6 @@ func main() {
 	c := a.Reduce(func(s, v string) string {
 		return s + v
 	}, "")
-
-	fmt.Println("x           ", x)
-	fmt.Println("y filter map", y)
-	fmt.Println("z unique    ", z)
 	fmt.Println("a new       ", a)
 	fmt.Println("b filter map", b)
 	fmt.Println("c reduce    ", c)
@@ -57,6 +56,41 @@ z unique     [a b c d]
 a new        [e f g h]
 b filter map [e! f! g! h!]
 c reduce     efgh
+```
+
+## Map between different types with `convert` or `interfaces`
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/kyroy/go-slices/convert"
+	"github.com/kyroy/go-slices/interfaces"
+)
+
+func main() {
+	a := []int{1, 2, 3, 4}
+	b := convert.IntsStrings(a, func(x int) string {
+		return fmt.Sprintf("%d?", x)
+	})
+	fmt.Println("a", a)
+	fmt.Println("b", b)
+
+	x := []interface{}{1, 2, 3, 4}
+	y := interfaces.Map(x, func(s interface{}) interface{} {
+		return fmt.Sprintf("%d!", s)
+	})
+	fmt.Println("x", x)
+	fmt.Println("y", y)
+}
+```
+prints
+```
+a [1 2 3 4]
+b [1? 2? 3? 4?]
+x [1 2 3 4]
+y [1! 2! 3! 4!]
 ```
 
 ## Generating Slices

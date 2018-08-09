@@ -25,7 +25,7 @@ func New(s []string) Strings {
 	return Strings(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []string, f func(s string) string) Strings {
 	m := Strings(make([]string, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []string, f func(s string) string) Strings {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Strings) Map(f func(s string) string) Strings {
 	return Map(s, f)
 }

@@ -25,7 +25,7 @@ func New(s []uint64) Uint64s {
 	return Uint64s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []uint64, f func(s uint64) uint64) Uint64s {
 	m := Uint64s(make([]uint64, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []uint64, f func(s uint64) uint64) Uint64s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Uint64s) Map(f func(s uint64) uint64) Uint64s {
 	return Map(s, f)
 }

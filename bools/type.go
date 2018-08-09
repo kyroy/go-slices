@@ -25,7 +25,7 @@ func New(s []bool) Bools {
 	return Bools(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []bool, f func(s bool) bool) Bools {
 	m := Bools(make([]bool, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []bool, f func(s bool) bool) Bools {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Bools) Map(f func(s bool) bool) Bools {
 	return Map(s, f)
 }

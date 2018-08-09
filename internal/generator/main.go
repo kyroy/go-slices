@@ -103,10 +103,17 @@ func main() {
 		fmt.Printf("failed to read types: %v\n", err)
 		os.Exit(1)
 	}
-
+	var types []sliceDef
+	for _, d := range defs {
+		types = append(types, d.Types...)
+	}
 	for _, d := range defs {
 		if err := generateType(d); err != nil {
 			fmt.Printf("failed to generate type: %v\n", err)
+			os.Exit(1)
+		}
+		if err := generateConverts(d, types); err != nil {
+			fmt.Printf("failed to generate map: %v\n", err)
 			os.Exit(1)
 		}
 		if err := generateExamples(d); err != nil {
@@ -158,6 +165,33 @@ func generateType(d definition) error {
 		defer f.Close()
 		if err := internal.TypeTemplate.Execute(f, t); err != nil {
 			return fmt.Errorf("failed to generate type %q: %v", t.Type, err)
+		}
+	}
+	return nil
+}
+
+func generateConverts(d definition, defs []sliceDef) error {
+	for _, t := range d.Types {
+		if err := os.MkdirAll("convert", os.ModePerm); err != nil {
+			return fmt.Errorf("failed to create dir convert: %v", err)
+		}
+		// convert/{type}.go
+		f, err := os.Create(path.Join("convert", t.Package+".go"))
+		if err != nil {
+			return fmt.Errorf("could not open file: %v", err)
+		}
+		defer f.Close()
+		x := struct {
+			Package string
+			Type    string
+			Other   []sliceDef
+		}{
+			Package: t.Package,
+			Type:    t.Type,
+			Other:   defs,
+		}
+		if err := internal.ConvertTemplate.Execute(f, x); err != nil {
+			return fmt.Errorf("failed to generate convert %q: %v", t.Type, err)
 		}
 	}
 	return nil

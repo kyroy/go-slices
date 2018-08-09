@@ -25,7 +25,7 @@ func New(s []uintptr) Uintptrs {
 	return Uintptrs(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []uintptr, f func(s uintptr) uintptr) Uintptrs {
 	m := Uintptrs(make([]uintptr, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []uintptr, f func(s uintptr) uintptr) Uintptrs {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Uintptrs) Map(f func(s uintptr) uintptr) Uintptrs {
 	return Map(s, f)
 }

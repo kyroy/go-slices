@@ -25,7 +25,7 @@ func New(s []interface{}) Interfaces {
 	return Interfaces(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []interface{}, f func(s interface{}) interface{}) Interfaces {
 	m := Interfaces(make([]interface{}, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []interface{}, f func(s interface{}) interface{}) Interfaces {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Interfaces) Map(f func(s interface{}) interface{}) Interfaces {
 	return Map(s, f)
 }

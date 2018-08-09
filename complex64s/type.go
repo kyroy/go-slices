@@ -25,7 +25,7 @@ func New(s []complex64) Complex64s {
 	return Complex64s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []complex64, f func(s complex64) complex64) Complex64s {
 	m := Complex64s(make([]complex64, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []complex64, f func(s complex64) complex64) Complex64s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Complex64s) Map(f func(s complex64) complex64) Complex64s {
 	return Map(s, f)
 }

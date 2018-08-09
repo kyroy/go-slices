@@ -25,7 +25,7 @@ func New(s []int32) Int32s {
 	return Int32s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []int32, f func(s int32) int32) Int32s {
 	m := Int32s(make([]int32, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []int32, f func(s int32) int32) Int32s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Int32s) Map(f func(s int32) int32) Int32s {
 	return Map(s, f)
 }

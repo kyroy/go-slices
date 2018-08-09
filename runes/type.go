@@ -25,7 +25,7 @@ func New(s []rune) Runes {
 	return Runes(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []rune, f func(s rune) rune) Runes {
 	m := Runes(make([]rune, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []rune, f func(s rune) rune) Runes {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Runes) Map(f func(s rune) rune) Runes {
 	return Map(s, f)
 }

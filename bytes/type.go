@@ -25,7 +25,7 @@ func New(s []byte) Bytes {
 	return Bytes(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []byte, f func(s byte) byte) Bytes {
 	m := Bytes(make([]byte, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []byte, f func(s byte) byte) Bytes {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Bytes) Map(f func(s byte) byte) Bytes {
 	return Map(s, f)
 }

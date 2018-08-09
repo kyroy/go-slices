@@ -25,7 +25,7 @@ func New(s []complex128) Complex128s {
 	return Complex128s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []complex128, f func(s complex128) complex128) Complex128s {
 	m := Complex128s(make([]complex128, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []complex128, f func(s complex128) complex128) Complex128s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Complex128s) Map(f func(s complex128) complex128) Complex128s {
 	return Map(s, f)
 }

@@ -27,6 +27,9 @@ func main() {
 		return s + "!"
 	})
 	z := strings.Unique(x)
+	fmt.Println("x           ", x)
+	fmt.Println("y filter map", y)
+	fmt.Println("z unique    ", z)
 
 	a := strings.New([]string{"e", "f", "g", "h"})
 	b := a.Filter(func(s string) bool {
@@ -37,10 +40,6 @@ func main() {
 	c := a.Reduce(func(s, v string) string {
 		return s + v
 	}, "")
-
-	fmt.Println("x           ", x)
-	fmt.Println("y filter map", y)
-	fmt.Println("z unique    ", z)
 	fmt.Println("a new       ", a)
 	fmt.Println("b filter map", b)
 	fmt.Println("c reduce    ", c)

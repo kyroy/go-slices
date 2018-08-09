@@ -25,7 +25,7 @@ func New(s []uint8) Uint8s {
 	return Uint8s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []uint8, f func(s uint8) uint8) Uint8s {
 	m := Uint8s(make([]uint8, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []uint8, f func(s uint8) uint8) Uint8s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Uint8s) Map(f func(s uint8) uint8) Uint8s {
 	return Map(s, f)
 }

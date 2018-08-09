@@ -51,7 +51,7 @@ func New(s []{{ $.Type }}) {{ $slice }} {
 	return {{ $slice }}(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []{{ $.Type }}, f func(s {{ $.Type }}) {{ $.Type }}) {{ $slice }} {
 	m := {{ $slice }}(make([]{{ $.Type }}, len(s)))
 	for i, v := range s {
@@ -60,7 +60,7 @@ func Map(s []{{ $.Type }}, f func(s {{ $.Type }}) {{ $.Type }}) {{ $slice }} {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s {{ $slice }}) Map(f func(s {{ $.Type }}) {{ $.Type }}) {{ $slice }} {
 	return Map(s, f)
 }

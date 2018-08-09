@@ -25,7 +25,7 @@ func New(s []float64) Float64s {
 	return Float64s(s)
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func Map(s []float64, f func(s float64) float64) Float64s {
 	m := Float64s(make([]float64, len(s)))
 	for i, v := range s {
@@ -34,7 +34,7 @@ func Map(s []float64, f func(s float64) float64) Float64s {
 	return m
 }
 
-// Map creates a new slice with the results of calling the provided function on every element in the calling array.
+// Map creates a new slice with the results of calling the provided function on every element in the given array.
 func (s Float64s) Map(f func(s float64) float64) Float64s {
 	return Map(s, f)
 }
