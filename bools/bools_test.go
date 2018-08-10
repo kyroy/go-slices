@@ -102,7 +102,7 @@ func TestReduce(t *testing.T) {
 				neutral: true,
 			},
 			want: false,
-		},{
+		}, {
 			name: "and_true",
 			args: args{
 				s:       []bool{true, true, true},
@@ -110,7 +110,7 @@ func TestReduce(t *testing.T) {
 				neutral: true,
 			},
 			want: true,
-		},{
+		}, {
 			name: "or_true",
 			args: args{
 				s:       []bool{false, false, true},
@@ -118,7 +118,7 @@ func TestReduce(t *testing.T) {
 				neutral: false,
 			},
 			want: true,
-		},{
+		}, {
 			name: "or_false",
 			args: args{
 				s:       []bool{false, false, false},
@@ -178,14 +178,14 @@ func TestIntersect(t *testing.T) {
 		{
 			name: "same",
 			args: args{
-				s: []bool{false, true, false},
+				s:    []bool{false, true, false},
 				more: [][]bool{{false, true, false}},
 			},
 			want: []bool{false, true, false},
-		},{
+		}, {
 			name: "multiple",
 			args: args{
-				s: []bool{false, true, false, true},
+				s:    []bool{false, true, false, true},
 				more: [][]bool{{false, true, false, false}, {false, true, false, true, false}},
 			},
 			want: []bool{false, true, false},
@@ -218,7 +218,7 @@ func TestContains(t *testing.T) {
 				x: false,
 			},
 			want: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []bool{true, true, true},
@@ -254,7 +254,7 @@ func TestIndexOf(t *testing.T) {
 				x: false,
 			},
 			want: 1,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []bool{true, true, true},
@@ -279,9 +279,9 @@ func TestFind(t *testing.T) {
 		f func(bool) bool
 	}
 	tests := []struct {
-		name string
-		args args
-		want bool
+		name  string
+		args  args
+		want  bool
 		found bool
 	}{
 		{
@@ -290,15 +290,15 @@ func TestFind(t *testing.T) {
 				s: []bool{true, false, true},
 				f: func(x bool) bool { return x },
 			},
-			want: true,
+			want:  true,
 			found: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []bool{false, false, false},
 				f: func(x bool) bool { return x },
 			},
-			want: true,
+			want:  true,
 			found: false,
 		},
 	}

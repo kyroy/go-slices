@@ -155,6 +155,7 @@ func (s Float32s) Contains(x float32) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []float32, x float32) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []float32, x float32) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Float32s) IndexOf(x float32) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []float32, f func(float32) bool) *float32 {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []float32, f func(float32) bool) *float32 {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Float32s) Find(f func(float32) bool) *float32 {
 	return Find(s, f)
 }

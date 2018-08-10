@@ -155,6 +155,7 @@ func (s Strings) Contains(x string) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []string, x string) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []string, x string) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Strings) IndexOf(x string) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []string, f func(string) bool) *string {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []string, f func(string) bool) *string {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Strings) Find(f func(string) bool) *string {
 	return Find(s, f)
 }

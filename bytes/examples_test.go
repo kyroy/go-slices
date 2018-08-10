@@ -23,8 +23,8 @@ import (
 
 func ExampleFilter() {
 	fmt.Println(bytes.Filter([]byte{1, 2, 3, 4}, func(x byte) bool {
-      return x % 2 == 0
-    }))
+		return x%2 == 0
+	}))
 	// Output: [2 4]
 }
 
@@ -35,15 +35,15 @@ func ExampleIntersect() {
 
 func ExampleMap() {
 	fmt.Println(bytes.Map([]byte{1, 2, 3, 4}, func(x byte) byte {
-      return 2 * x
-    }))
+		return 2 * x
+	}))
 	// Output: [2 4 6 8]
 }
 
 func ExampleReduce() {
 	fmt.Println(bytes.Reduce([]byte{1, 2, 3, 4}, func(x, y byte) byte {
-      return x + y
-    }, 0))
+		return x + y
+	}, 0))
 	// Output: 10
 }
 

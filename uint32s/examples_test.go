@@ -23,8 +23,8 @@ import (
 
 func ExampleFilter() {
 	fmt.Println(uint32s.Filter([]uint32{1, 2, 3, 4}, func(x uint32) bool {
-      return x % 2 == 0
-    }))
+		return x%2 == 0
+	}))
 	// Output: [2 4]
 }
 
@@ -35,15 +35,15 @@ func ExampleIntersect() {
 
 func ExampleMap() {
 	fmt.Println(uint32s.Map([]uint32{1, 2, 3, 4}, func(x uint32) uint32 {
-      return 2 * x
-    }))
+		return 2 * x
+	}))
 	// Output: [2 4 6 8]
 }
 
 func ExampleReduce() {
 	fmt.Println(uint32s.Reduce([]uint32{1, 2, 3, 4}, func(x, y uint32) uint32 {
-      return x + y
-    }, 0))
+		return x + y
+	}, 0))
 	// Output: 10
 }
 

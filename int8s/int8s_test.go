@@ -154,14 +154,14 @@ func TestIntersect(t *testing.T) {
 		{
 			name: "same",
 			args: args{
-				s: []int8{1, 2, 3, 4},
+				s:    []int8{1, 2, 3, 4},
 				more: [][]int8{{1, 2, 3, 4}},
 			},
 			want: []int8{1, 2, 3, 4},
-		},{
+		}, {
 			name: "multiple",
 			args: args{
-				s: []int8{1, 1, 2, 1, 3, 5, 4},
+				s:    []int8{1, 1, 2, 1, 3, 5, 4},
 				more: [][]int8{{1, 2, 2, 3, 1}, {1, 2, 1, 5, 4}},
 			},
 			want: []int8{1, 1, 2},
@@ -194,7 +194,7 @@ func TestContains(t *testing.T) {
 				x: 3,
 			},
 			want: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []int8{1, 1, 2, 1, 3, 5, 4},
@@ -230,7 +230,7 @@ func TestIndexOf(t *testing.T) {
 				x: 3,
 			},
 			want: 2,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []int8{1, 1, 2, 1, 3, 5, 4},
@@ -255,9 +255,9 @@ func TestFind(t *testing.T) {
 		f func(int8) bool
 	}
 	tests := []struct {
-		name string
-		args args
-		want int8
+		name  string
+		args  args
+		want  int8
 		found bool
 	}{
 		{
@@ -266,15 +266,15 @@ func TestFind(t *testing.T) {
 				s: []int8{1, 2, 3, 4, 2},
 				f: func(x int8) bool { return x > 1 && x < 4 },
 			},
-			want: 2,
+			want:  2,
 			found: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []int8{1, 2, 3, 4, 2},
 				f: func(x int8) bool { return x > 5 },
 			},
-			want: 0,
+			want:  0,
 			found: false,
 		},
 	}

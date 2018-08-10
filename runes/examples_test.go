@@ -23,8 +23,8 @@ import (
 
 func ExampleFilter() {
 	fmt.Println(runes.Filter([]rune{1, 2, 3, 4}, func(x rune) bool {
-      return x % 2 == 0
-    }))
+		return x%2 == 0
+	}))
 	// Output: [2 4]
 }
 
@@ -35,15 +35,15 @@ func ExampleIntersect() {
 
 func ExampleMap() {
 	fmt.Println(runes.Map([]rune{1, 2, 3, 4}, func(x rune) rune {
-      return 2 * x
-    }))
+		return 2 * x
+	}))
 	// Output: [2 4 6 8]
 }
 
 func ExampleReduce() {
 	fmt.Println(runes.Reduce([]rune{1, 2, 3, 4}, func(x, y rune) rune {
-      return x + y
-    }, 0))
+		return x + y
+	}, 0))
 	// Output: 10
 }
 

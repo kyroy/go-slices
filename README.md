@@ -117,4 +117,5 @@ y [1! 2! 3! 4!]
 ## Generating Slices
 ```bash
 go run internal/generator/main.go internal/generator/types
+go fmt ./...
 ```

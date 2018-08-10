@@ -39,7 +39,16 @@ func TestMap(t *testing.T) {
 			name: "basic",
 			args: args{
 				s: []interface{}{"a", 1, "1", 2},
-				f: func(x interface{}) interface{} { switch a := x.(type) { case string: return a + "!"; case int: return a + 1; default: return a } },
+				f: func(x interface{}) interface{} {
+					switch a := x.(type) {
+					case string:
+						return a + "!"
+					case int:
+						return a + 1
+					default:
+						return a
+					}
+				},
 			},
 			want: []interface{}{"a!", 2, "1!", 3},
 		},
@@ -68,7 +77,14 @@ func TestFilter(t *testing.T) {
 			name: "basic",
 			args: args{
 				s: []interface{}{"a", 1, "1", 2},
-				f: func(x interface{}) bool { switch x.(type) { case string: return true; default: return false } },
+				f: func(x interface{}) bool {
+					switch x.(type) {
+					case string:
+						return true
+					default:
+						return false
+					}
+				},
 			},
 			want: []interface{}{"a", "1"},
 		},
@@ -154,14 +170,14 @@ func TestIntersect(t *testing.T) {
 		{
 			name: "same",
 			args: args{
-				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				s:    []interface{}{"a", 1, "1", 1, 2, "a"},
 				more: [][]interface{}{{"a", 1, "1", 1, 2, "a"}},
 			},
 			want: []interface{}{"a", 1, "1", 1, 2, "a"},
-		},{
+		}, {
 			name: "multiple",
 			args: args{
-				s: []interface{}{"a", 1, "1", 1, 2, "a"},
+				s:    []interface{}{"a", 1, "1", 1, 2, "a"},
 				more: [][]interface{}{{"a", 1, "1"}, {"1", 1}},
 			},
 			want: []interface{}{1, "1"},
@@ -194,7 +210,7 @@ func TestContains(t *testing.T) {
 				x: 2,
 			},
 			want: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []interface{}{"a", 1, "1", 1, 2, "a"},
@@ -230,7 +246,7 @@ func TestIndexOf(t *testing.T) {
 				x: 2,
 			},
 			want: 4,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []interface{}{"a", 1, "1", 1, 2, "a"},
@@ -255,9 +271,9 @@ func TestFind(t *testing.T) {
 		f func(interface{}) bool
 	}
 	tests := []struct {
-		name string
-		args args
-		want interface{}
+		name  string
+		args  args
+		want  interface{}
 		found bool
 	}{
 		{
@@ -266,15 +282,15 @@ func TestFind(t *testing.T) {
 				s: []interface{}{"a", 1, "1", 1, 2, "a"},
 				f: func(x interface{}) bool { return x == interface{}(1) },
 			},
-			want: 1,
+			want:  1,
 			found: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []interface{}{"a", 1, "1", 1, 2, "a"},
 				f: func(x interface{}) bool { return x == nil },
 			},
-			want: "x",
+			want:  "x",
 			found: false,
 		},
 	}

@@ -155,6 +155,7 @@ func (s Interfaces) Contains(x interface{}) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []interface{}, x interface{}) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []interface{}, x interface{}) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Interfaces) IndexOf(x interface{}) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []interface{}, f func(interface{}) bool) *interface{} {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []interface{}, f func(interface{}) bool) *interface{} {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Interfaces) Find(f func(interface{}) bool) *interface{} {
 	return Find(s, f)
 }

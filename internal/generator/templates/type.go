@@ -181,6 +181,7 @@ func (s {{ $slice }}) Contains(x {{ $.Type }}) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []{{ $.Type }}, x {{ $.Type }}) int {
 	for i, e := range s {
 		if e == x {
@@ -191,11 +192,13 @@ func IndexOf(s []{{ $.Type }}, x {{ $.Type }}) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s {{ $slice }}) IndexOf(x {{ $.Type }}) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []{{ $.Type }}, f func({{ $.Type }}) bool) *{{ $.Type }} {
 	for _, e := range s {
 		if f(e) {
@@ -206,6 +209,7 @@ func Find(s []{{ $.Type }}, f func({{ $.Type }}) bool) *{{ $.Type }} {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s {{ $slice }}) Find(f func({{ $.Type }}) bool) *{{ $.Type }} {
 	return Find(s, f)
 }

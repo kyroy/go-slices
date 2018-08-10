@@ -154,14 +154,14 @@ func TestIntersect(t *testing.T) {
 		{
 			name: "same",
 			args: args{
-				s: []string{"a", "b", "c", "a"},
+				s:    []string{"a", "b", "c", "a"},
 				more: [][]string{{"a", "b", "c", "a"}},
 			},
 			want: []string{"a", "b", "c", "a"},
-		},{
+		}, {
 			name: "multiple",
 			args: args{
-				s: []string{"a", "b", "c", "a"},
+				s:    []string{"a", "b", "c", "a"},
 				more: [][]string{{"a", "b", "a"}, {"b", "a"}},
 			},
 			want: []string{"a", "b"},
@@ -194,7 +194,7 @@ func TestContains(t *testing.T) {
 				x: "b",
 			},
 			want: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []string{"a", "b", "c", "a"},
@@ -230,7 +230,7 @@ func TestIndexOf(t *testing.T) {
 				x: "b",
 			},
 			want: 1,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []string{"a", "b", "c", "a"},
@@ -255,9 +255,9 @@ func TestFind(t *testing.T) {
 		f func(string) bool
 	}
 	tests := []struct {
-		name string
-		args args
-		want string
+		name  string
+		args  args
+		want  string
 		found bool
 	}{
 		{
@@ -266,15 +266,15 @@ func TestFind(t *testing.T) {
 				s: []string{"a", "b", "c", "a"},
 				f: func(x string) bool { return x > "a" },
 			},
-			want: "b",
+			want:  "b",
 			found: true,
-		},{
+		}, {
 			name: "not_contains",
 			args: args{
 				s: []string{"a", "b", "c", "a"},
 				f: func(x string) bool { return x < "a" },
 			},
-			want: "x",
+			want:  "x",
 			found: false,
 		},
 	}

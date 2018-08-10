@@ -155,6 +155,7 @@ func (s Runes) Contains(x rune) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []rune, x rune) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []rune, x rune) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Runes) IndexOf(x rune) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []rune, f func(rune) bool) *rune {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []rune, f func(rune) bool) *rune {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Runes) Find(f func(rune) bool) *rune {
 	return Find(s, f)
 }

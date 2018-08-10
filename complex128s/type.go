@@ -155,6 +155,7 @@ func (s Complex128s) Contains(x complex128) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []complex128, x complex128) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []complex128, x complex128) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Complex128s) IndexOf(x complex128) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []complex128, f func(complex128) bool) *complex128 {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []complex128, f func(complex128) bool) *complex128 {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Complex128s) Find(f func(complex128) bool) *complex128 {
 	return Find(s, f)
 }

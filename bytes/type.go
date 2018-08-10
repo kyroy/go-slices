@@ -155,6 +155,7 @@ func (s Bytes) Contains(x byte) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []byte, x byte) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []byte, x byte) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Bytes) IndexOf(x byte) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []byte, f func(byte) bool) *byte {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []byte, f func(byte) bool) *byte {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Bytes) Find(f func(byte) bool) *byte {
 	return Find(s, f)
 }

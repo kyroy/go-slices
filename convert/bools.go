@@ -17,25 +17,25 @@
 package convert
 
 import (
+	"github.com/kyroy/go-slices/bytes"
+	"github.com/kyroy/go-slices/complex128s"
+	"github.com/kyroy/go-slices/complex64s"
 	"github.com/kyroy/go-slices/float32s"
 	"github.com/kyroy/go-slices/float64s"
-	"github.com/kyroy/go-slices/interfaces"
-	"github.com/kyroy/go-slices/int8s"
 	"github.com/kyroy/go-slices/int16s"
 	"github.com/kyroy/go-slices/int32s"
 	"github.com/kyroy/go-slices/int64s"
-	"github.com/kyroy/go-slices/uint8s"
+	"github.com/kyroy/go-slices/int8s"
+	"github.com/kyroy/go-slices/interfaces"
+	"github.com/kyroy/go-slices/ints"
+	"github.com/kyroy/go-slices/runes"
+	"github.com/kyroy/go-slices/strings"
 	"github.com/kyroy/go-slices/uint16s"
 	"github.com/kyroy/go-slices/uint32s"
 	"github.com/kyroy/go-slices/uint64s"
-	"github.com/kyroy/go-slices/ints"
-	"github.com/kyroy/go-slices/uints"
-	"github.com/kyroy/go-slices/bytes"
-	"github.com/kyroy/go-slices/runes"
-	"github.com/kyroy/go-slices/complex64s"
-	"github.com/kyroy/go-slices/complex128s"
+	"github.com/kyroy/go-slices/uint8s"
 	"github.com/kyroy/go-slices/uintptrs"
-	"github.com/kyroy/go-slices/strings"
+	"github.com/kyroy/go-slices/uints"
 )
 
 // BoolsFloat32s creates a new slice with the results of calling the provided function on every element in the given array.

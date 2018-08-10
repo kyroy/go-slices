@@ -155,6 +155,7 @@ func (s Uint64s) Contains(x uint64) bool {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func IndexOf(s []uint64, x uint64) int {
 	for i, e := range s {
 		if e == x {
@@ -165,11 +166,13 @@ func IndexOf(s []uint64, x uint64) int {
 }
 
 // IndexOf returns the position of the first occurrence of the specified value.
+// Returns -1 if not found.
 func (s Uint64s) IndexOf(x uint64) int {
 	return IndexOf(s, x)
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func Find(s []uint64, f func(uint64) bool) *uint64 {
 	for _, e := range s {
 		if f(e) {
@@ -180,6 +183,7 @@ func Find(s []uint64, f func(uint64) bool) *uint64 {
 }
 
 // Find returns the first element that passes the test implemented by the provided function.
+// Returns nil if not found.
 func (s Uint64s) Find(f func(uint64) bool) *uint64 {
 	return Find(s, f)
 }

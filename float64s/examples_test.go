@@ -23,7 +23,7 @@ import (
 
 func ExampleMap() {
 	fmt.Println(float64s.Map([]float64{1, 2, 3}, func(x float64) float64 {
-      return 2 * x
-    }))
+		return 2 * x
+	}))
 	// Output: [2 4 6]
 }

@@ -23,7 +23,7 @@ import (
 
 func ExampleMap() {
 	fmt.Println(strings.Map([]string{"a", "b"}, func(s string) string {
-      return s + "!"
-    }))
+		return s + "!"
+	}))
 	// Output: [a! b!]
 }
