@@ -48,11 +48,75 @@ func StringsBools(s []string, f func(s string) bool) bools.Bools {
 	return m
 }
 
+// StringsBoolsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsBoolsE(s []string, f func(s string) (bool, error)) (bools.Bools, error) {
+	m := bools.Bools(make([]bool, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsBoolsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsBoolsF(s []string, f func(s string) (bool, error)) bools.Bools {
+	m := bools.Bools(make([]bool, 0, len(s)))
+	var (
+		x   bool
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsFloat32s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsFloat32s(s []string, f func(s string) float32) float32s.Float32s {
 	m := float32s.Float32s(make([]float32, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsFloat32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsFloat32sE(s []string, f func(s string) (float32, error)) (float32s.Float32s, error) {
+	m := float32s.Float32s(make([]float32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsFloat32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsFloat32sF(s []string, f func(s string) (float32, error)) float32s.Float32s {
+	m := float32s.Float32s(make([]float32, 0, len(s)))
+	var (
+		x   float32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -66,11 +130,75 @@ func StringsFloat64s(s []string, f func(s string) float64) float64s.Float64s {
 	return m
 }
 
+// StringsFloat64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsFloat64sE(s []string, f func(s string) (float64, error)) (float64s.Float64s, error) {
+	m := float64s.Float64s(make([]float64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsFloat64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsFloat64sF(s []string, f func(s string) (float64, error)) float64s.Float64s {
+	m := float64s.Float64s(make([]float64, 0, len(s)))
+	var (
+		x   float64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsInterfaces creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsInterfaces(s []string, f func(s string) interface{}) interfaces.Interfaces {
 	m := interfaces.Interfaces(make([]interface{}, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsInterfacesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsInterfacesE(s []string, f func(s string) (interface{}, error)) (interfaces.Interfaces, error) {
+	m := interfaces.Interfaces(make([]interface{}, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsInterfacesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsInterfacesF(s []string, f func(s string) (interface{}, error)) interfaces.Interfaces {
+	m := interfaces.Interfaces(make([]interface{}, 0, len(s)))
+	var (
+		x   interface{}
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -84,11 +212,75 @@ func StringsInt8s(s []string, f func(s string) int8) int8s.Int8s {
 	return m
 }
 
+// StringsInt8sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsInt8sE(s []string, f func(s string) (int8, error)) (int8s.Int8s, error) {
+	m := int8s.Int8s(make([]int8, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsInt8sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsInt8sF(s []string, f func(s string) (int8, error)) int8s.Int8s {
+	m := int8s.Int8s(make([]int8, 0, len(s)))
+	var (
+		x   int8
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsInt16s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsInt16s(s []string, f func(s string) int16) int16s.Int16s {
 	m := int16s.Int16s(make([]int16, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsInt16sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsInt16sE(s []string, f func(s string) (int16, error)) (int16s.Int16s, error) {
+	m := int16s.Int16s(make([]int16, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsInt16sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsInt16sF(s []string, f func(s string) (int16, error)) int16s.Int16s {
+	m := int16s.Int16s(make([]int16, 0, len(s)))
+	var (
+		x   int16
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -102,11 +294,75 @@ func StringsInt32s(s []string, f func(s string) int32) int32s.Int32s {
 	return m
 }
 
+// StringsInt32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsInt32sE(s []string, f func(s string) (int32, error)) (int32s.Int32s, error) {
+	m := int32s.Int32s(make([]int32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsInt32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsInt32sF(s []string, f func(s string) (int32, error)) int32s.Int32s {
+	m := int32s.Int32s(make([]int32, 0, len(s)))
+	var (
+		x   int32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsInt64s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsInt64s(s []string, f func(s string) int64) int64s.Int64s {
 	m := int64s.Int64s(make([]int64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsInt64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsInt64sE(s []string, f func(s string) (int64, error)) (int64s.Int64s, error) {
+	m := int64s.Int64s(make([]int64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsInt64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsInt64sF(s []string, f func(s string) (int64, error)) int64s.Int64s {
+	m := int64s.Int64s(make([]int64, 0, len(s)))
+	var (
+		x   int64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -120,11 +376,75 @@ func StringsUint8s(s []string, f func(s string) uint8) uint8s.Uint8s {
 	return m
 }
 
+// StringsUint8sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUint8sE(s []string, f func(s string) (uint8, error)) (uint8s.Uint8s, error) {
+	m := uint8s.Uint8s(make([]uint8, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUint8sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUint8sF(s []string, f func(s string) (uint8, error)) uint8s.Uint8s {
+	m := uint8s.Uint8s(make([]uint8, 0, len(s)))
+	var (
+		x   uint8
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsUint16s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsUint16s(s []string, f func(s string) uint16) uint16s.Uint16s {
 	m := uint16s.Uint16s(make([]uint16, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsUint16sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUint16sE(s []string, f func(s string) (uint16, error)) (uint16s.Uint16s, error) {
+	m := uint16s.Uint16s(make([]uint16, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUint16sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUint16sF(s []string, f func(s string) (uint16, error)) uint16s.Uint16s {
+	m := uint16s.Uint16s(make([]uint16, 0, len(s)))
+	var (
+		x   uint16
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -138,11 +458,75 @@ func StringsUint32s(s []string, f func(s string) uint32) uint32s.Uint32s {
 	return m
 }
 
+// StringsUint32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUint32sE(s []string, f func(s string) (uint32, error)) (uint32s.Uint32s, error) {
+	m := uint32s.Uint32s(make([]uint32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUint32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUint32sF(s []string, f func(s string) (uint32, error)) uint32s.Uint32s {
+	m := uint32s.Uint32s(make([]uint32, 0, len(s)))
+	var (
+		x   uint32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsUint64s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsUint64s(s []string, f func(s string) uint64) uint64s.Uint64s {
 	m := uint64s.Uint64s(make([]uint64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsUint64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUint64sE(s []string, f func(s string) (uint64, error)) (uint64s.Uint64s, error) {
+	m := uint64s.Uint64s(make([]uint64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUint64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUint64sF(s []string, f func(s string) (uint64, error)) uint64s.Uint64s {
+	m := uint64s.Uint64s(make([]uint64, 0, len(s)))
+	var (
+		x   uint64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -156,11 +540,75 @@ func StringsInts(s []string, f func(s string) int) ints.Ints {
 	return m
 }
 
+// StringsIntsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsIntsE(s []string, f func(s string) (int, error)) (ints.Ints, error) {
+	m := ints.Ints(make([]int, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsIntsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsIntsF(s []string, f func(s string) (int, error)) ints.Ints {
+	m := ints.Ints(make([]int, 0, len(s)))
+	var (
+		x   int
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsUints creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsUints(s []string, f func(s string) uint) uints.Uints {
 	m := uints.Uints(make([]uint, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsUintsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUintsE(s []string, f func(s string) (uint, error)) (uints.Uints, error) {
+	m := uints.Uints(make([]uint, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUintsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUintsF(s []string, f func(s string) (uint, error)) uints.Uints {
+	m := uints.Uints(make([]uint, 0, len(s)))
+	var (
+		x   uint
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -174,11 +622,75 @@ func StringsBytes(s []string, f func(s string) byte) bytes.Bytes {
 	return m
 }
 
+// StringsBytesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsBytesE(s []string, f func(s string) (byte, error)) (bytes.Bytes, error) {
+	m := bytes.Bytes(make([]byte, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsBytesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsBytesF(s []string, f func(s string) (byte, error)) bytes.Bytes {
+	m := bytes.Bytes(make([]byte, 0, len(s)))
+	var (
+		x   byte
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsRunes creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsRunes(s []string, f func(s string) rune) runes.Runes {
 	m := runes.Runes(make([]rune, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsRunesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsRunesE(s []string, f func(s string) (rune, error)) (runes.Runes, error) {
+	m := runes.Runes(make([]rune, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsRunesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsRunesF(s []string, f func(s string) (rune, error)) runes.Runes {
+	m := runes.Runes(make([]rune, 0, len(s)))
+	var (
+		x   rune
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -192,6 +704,38 @@ func StringsComplex64s(s []string, f func(s string) complex64) complex64s.Comple
 	return m
 }
 
+// StringsComplex64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsComplex64sE(s []string, f func(s string) (complex64, error)) (complex64s.Complex64s, error) {
+	m := complex64s.Complex64s(make([]complex64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsComplex64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsComplex64sF(s []string, f func(s string) (complex64, error)) complex64s.Complex64s {
+	m := complex64s.Complex64s(make([]complex64, 0, len(s)))
+	var (
+		x   complex64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsComplex128s creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsComplex128s(s []string, f func(s string) complex128) complex128s.Complex128s {
 	m := complex128s.Complex128s(make([]complex128, len(s)))
@@ -201,11 +745,75 @@ func StringsComplex128s(s []string, f func(s string) complex128) complex128s.Com
 	return m
 }
 
+// StringsComplex128sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsComplex128sE(s []string, f func(s string) (complex128, error)) (complex128s.Complex128s, error) {
+	m := complex128s.Complex128s(make([]complex128, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsComplex128sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsComplex128sF(s []string, f func(s string) (complex128, error)) complex128s.Complex128s {
+	m := complex128s.Complex128s(make([]complex128, 0, len(s)))
+	var (
+		x   complex128
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // StringsUintptrs creates a new slice with the results of calling the provided function on every element in the given array.
 func StringsUintptrs(s []string, f func(s string) uintptr) uintptrs.Uintptrs {
 	m := uintptrs.Uintptrs(make([]uintptr, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// StringsUintptrsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func StringsUintptrsE(s []string, f func(s string) (uintptr, error)) (uintptrs.Uintptrs, error) {
+	m := uintptrs.Uintptrs(make([]uintptr, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// StringsUintptrsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func StringsUintptrsF(s []string, f func(s string) (uintptr, error)) uintptrs.Uintptrs {
+	m := uintptrs.Uintptrs(make([]uintptr, 0, len(s)))
+	var (
+		x   uintptr
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }

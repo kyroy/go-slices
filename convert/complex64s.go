@@ -48,11 +48,75 @@ func Complex64sBools(s []complex64, f func(s complex64) bool) bools.Bools {
 	return m
 }
 
+// Complex64sBoolsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sBoolsE(s []complex64, f func(s complex64) (bool, error)) (bools.Bools, error) {
+	m := bools.Bools(make([]bool, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sBoolsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sBoolsF(s []complex64, f func(s complex64) (bool, error)) bools.Bools {
+	m := bools.Bools(make([]bool, 0, len(s)))
+	var (
+		x   bool
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sFloat32s creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sFloat32s(s []complex64, f func(s complex64) float32) float32s.Float32s {
 	m := float32s.Float32s(make([]float32, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sFloat32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sFloat32sE(s []complex64, f func(s complex64) (float32, error)) (float32s.Float32s, error) {
+	m := float32s.Float32s(make([]float32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sFloat32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sFloat32sF(s []complex64, f func(s complex64) (float32, error)) float32s.Float32s {
+	m := float32s.Float32s(make([]float32, 0, len(s)))
+	var (
+		x   float32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -66,11 +130,75 @@ func Complex64sFloat64s(s []complex64, f func(s complex64) float64) float64s.Flo
 	return m
 }
 
+// Complex64sFloat64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sFloat64sE(s []complex64, f func(s complex64) (float64, error)) (float64s.Float64s, error) {
+	m := float64s.Float64s(make([]float64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sFloat64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sFloat64sF(s []complex64, f func(s complex64) (float64, error)) float64s.Float64s {
+	m := float64s.Float64s(make([]float64, 0, len(s)))
+	var (
+		x   float64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sInterfaces creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sInterfaces(s []complex64, f func(s complex64) interface{}) interfaces.Interfaces {
 	m := interfaces.Interfaces(make([]interface{}, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sInterfacesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sInterfacesE(s []complex64, f func(s complex64) (interface{}, error)) (interfaces.Interfaces, error) {
+	m := interfaces.Interfaces(make([]interface{}, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sInterfacesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sInterfacesF(s []complex64, f func(s complex64) (interface{}, error)) interfaces.Interfaces {
+	m := interfaces.Interfaces(make([]interface{}, 0, len(s)))
+	var (
+		x   interface{}
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -84,11 +212,75 @@ func Complex64sInt8s(s []complex64, f func(s complex64) int8) int8s.Int8s {
 	return m
 }
 
+// Complex64sInt8sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sInt8sE(s []complex64, f func(s complex64) (int8, error)) (int8s.Int8s, error) {
+	m := int8s.Int8s(make([]int8, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sInt8sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sInt8sF(s []complex64, f func(s complex64) (int8, error)) int8s.Int8s {
+	m := int8s.Int8s(make([]int8, 0, len(s)))
+	var (
+		x   int8
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sInt16s creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sInt16s(s []complex64, f func(s complex64) int16) int16s.Int16s {
 	m := int16s.Int16s(make([]int16, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sInt16sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sInt16sE(s []complex64, f func(s complex64) (int16, error)) (int16s.Int16s, error) {
+	m := int16s.Int16s(make([]int16, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sInt16sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sInt16sF(s []complex64, f func(s complex64) (int16, error)) int16s.Int16s {
+	m := int16s.Int16s(make([]int16, 0, len(s)))
+	var (
+		x   int16
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -102,11 +294,75 @@ func Complex64sInt32s(s []complex64, f func(s complex64) int32) int32s.Int32s {
 	return m
 }
 
+// Complex64sInt32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sInt32sE(s []complex64, f func(s complex64) (int32, error)) (int32s.Int32s, error) {
+	m := int32s.Int32s(make([]int32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sInt32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sInt32sF(s []complex64, f func(s complex64) (int32, error)) int32s.Int32s {
+	m := int32s.Int32s(make([]int32, 0, len(s)))
+	var (
+		x   int32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sInt64s creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sInt64s(s []complex64, f func(s complex64) int64) int64s.Int64s {
 	m := int64s.Int64s(make([]int64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sInt64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sInt64sE(s []complex64, f func(s complex64) (int64, error)) (int64s.Int64s, error) {
+	m := int64s.Int64s(make([]int64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sInt64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sInt64sF(s []complex64, f func(s complex64) (int64, error)) int64s.Int64s {
+	m := int64s.Int64s(make([]int64, 0, len(s)))
+	var (
+		x   int64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -120,11 +376,75 @@ func Complex64sUint8s(s []complex64, f func(s complex64) uint8) uint8s.Uint8s {
 	return m
 }
 
+// Complex64sUint8sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUint8sE(s []complex64, f func(s complex64) (uint8, error)) (uint8s.Uint8s, error) {
+	m := uint8s.Uint8s(make([]uint8, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUint8sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUint8sF(s []complex64, f func(s complex64) (uint8, error)) uint8s.Uint8s {
+	m := uint8s.Uint8s(make([]uint8, 0, len(s)))
+	var (
+		x   uint8
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sUint16s creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sUint16s(s []complex64, f func(s complex64) uint16) uint16s.Uint16s {
 	m := uint16s.Uint16s(make([]uint16, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sUint16sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUint16sE(s []complex64, f func(s complex64) (uint16, error)) (uint16s.Uint16s, error) {
+	m := uint16s.Uint16s(make([]uint16, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUint16sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUint16sF(s []complex64, f func(s complex64) (uint16, error)) uint16s.Uint16s {
+	m := uint16s.Uint16s(make([]uint16, 0, len(s)))
+	var (
+		x   uint16
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -138,11 +458,75 @@ func Complex64sUint32s(s []complex64, f func(s complex64) uint32) uint32s.Uint32
 	return m
 }
 
+// Complex64sUint32sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUint32sE(s []complex64, f func(s complex64) (uint32, error)) (uint32s.Uint32s, error) {
+	m := uint32s.Uint32s(make([]uint32, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUint32sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUint32sF(s []complex64, f func(s complex64) (uint32, error)) uint32s.Uint32s {
+	m := uint32s.Uint32s(make([]uint32, 0, len(s)))
+	var (
+		x   uint32
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sUint64s creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sUint64s(s []complex64, f func(s complex64) uint64) uint64s.Uint64s {
 	m := uint64s.Uint64s(make([]uint64, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sUint64sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUint64sE(s []complex64, f func(s complex64) (uint64, error)) (uint64s.Uint64s, error) {
+	m := uint64s.Uint64s(make([]uint64, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUint64sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUint64sF(s []complex64, f func(s complex64) (uint64, error)) uint64s.Uint64s {
+	m := uint64s.Uint64s(make([]uint64, 0, len(s)))
+	var (
+		x   uint64
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -156,11 +540,75 @@ func Complex64sInts(s []complex64, f func(s complex64) int) ints.Ints {
 	return m
 }
 
+// Complex64sIntsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sIntsE(s []complex64, f func(s complex64) (int, error)) (ints.Ints, error) {
+	m := ints.Ints(make([]int, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sIntsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sIntsF(s []complex64, f func(s complex64) (int, error)) ints.Ints {
+	m := ints.Ints(make([]int, 0, len(s)))
+	var (
+		x   int
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sUints creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sUints(s []complex64, f func(s complex64) uint) uints.Uints {
 	m := uints.Uints(make([]uint, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sUintsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUintsE(s []complex64, f func(s complex64) (uint, error)) (uints.Uints, error) {
+	m := uints.Uints(make([]uint, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUintsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUintsF(s []complex64, f func(s complex64) (uint, error)) uints.Uints {
+	m := uints.Uints(make([]uint, 0, len(s)))
+	var (
+		x   uint
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -174,11 +622,75 @@ func Complex64sBytes(s []complex64, f func(s complex64) byte) bytes.Bytes {
 	return m
 }
 
+// Complex64sBytesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sBytesE(s []complex64, f func(s complex64) (byte, error)) (bytes.Bytes, error) {
+	m := bytes.Bytes(make([]byte, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sBytesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sBytesF(s []complex64, f func(s complex64) (byte, error)) bytes.Bytes {
+	m := bytes.Bytes(make([]byte, 0, len(s)))
+	var (
+		x   byte
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sRunes creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sRunes(s []complex64, f func(s complex64) rune) runes.Runes {
 	m := runes.Runes(make([]rune, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sRunesE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sRunesE(s []complex64, f func(s complex64) (rune, error)) (runes.Runes, error) {
+	m := runes.Runes(make([]rune, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sRunesF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sRunesF(s []complex64, f func(s complex64) (rune, error)) runes.Runes {
+	m := runes.Runes(make([]rune, 0, len(s)))
+	var (
+		x   rune
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }
@@ -192,6 +704,38 @@ func Complex64sComplex128s(s []complex64, f func(s complex64) complex128) comple
 	return m
 }
 
+// Complex64sComplex128sE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sComplex128sE(s []complex64, f func(s complex64) (complex128, error)) (complex128s.Complex128s, error) {
+	m := complex128s.Complex128s(make([]complex128, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sComplex128sF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sComplex128sF(s []complex64, f func(s complex64) (complex128, error)) complex128s.Complex128s {
+	m := complex128s.Complex128s(make([]complex128, 0, len(s)))
+	var (
+		x   complex128
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sUintptrs creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sUintptrs(s []complex64, f func(s complex64) uintptr) uintptrs.Uintptrs {
 	m := uintptrs.Uintptrs(make([]uintptr, len(s)))
@@ -201,11 +745,75 @@ func Complex64sUintptrs(s []complex64, f func(s complex64) uintptr) uintptrs.Uin
 	return m
 }
 
+// Complex64sUintptrsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sUintptrsE(s []complex64, f func(s complex64) (uintptr, error)) (uintptrs.Uintptrs, error) {
+	m := uintptrs.Uintptrs(make([]uintptr, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sUintptrsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sUintptrsF(s []complex64, f func(s complex64) (uintptr, error)) uintptrs.Uintptrs {
+	m := uintptrs.Uintptrs(make([]uintptr, 0, len(s)))
+	var (
+		x   uintptr
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
+	}
+	return m
+}
+
 // Complex64sStrings creates a new slice with the results of calling the provided function on every element in the given array.
 func Complex64sStrings(s []complex64, f func(s complex64) string) strings.Strings {
 	m := strings.Strings(make([]string, len(s)))
 	for i, v := range s {
 		m[i] = f(v)
+	}
+	return m
+}
+
+// Complex64sStringsE creates a new slice with the results of calling the provided function on every element in the given array.
+// Returns an error if one of the function calls fails.
+func Complex64sStringsE(s []complex64, f func(s complex64) (string, error)) (strings.Strings, error) {
+	m := strings.Strings(make([]string, len(s)))
+	var err error
+	for i, v := range s {
+		m[i], err = f(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
+}
+
+// Complex64sStringsF creates a new slice with the results of calling the provided function on every element in the given array.
+// If the given function returns an error, the element will be ignored.
+func Complex64sStringsF(s []complex64, f func(s complex64) (string, error)) strings.Strings {
+	m := strings.Strings(make([]string, 0, len(s)))
+	var (
+		x   string
+		err error
+	)
+	for _, v := range s {
+		x, err = f(v)
+		if err != nil {
+			continue
+		}
+		m = append(m, x)
 	}
 	return m
 }

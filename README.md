@@ -67,6 +67,7 @@ import (
 	"fmt"
 	"github.com/kyroy/go-slices/convert"
 	"github.com/kyroy/go-slices/interfaces"
+	"strconv"
 )
 
 func main() {
@@ -76,6 +77,20 @@ func main() {
 	})
 	fmt.Println("a", a)
 	fmt.Println("b", b)
+
+	c := []string{"1", "4", "6", "8"}
+	d := convert.StringsIntsF(c, strconv.Atoi)
+	e, err := convert.StringsIntsE(c, strconv.Atoi)
+	fmt.Println("c", c)
+	fmt.Println("d", d)
+	fmt.Println("e", e, "err", err)
+
+	f := []string{"1", "a", "2"}
+	g := convert.StringsIntsF(f, strconv.Atoi)
+	h, err := convert.StringsIntsE(f, strconv.Atoi)
+	fmt.Println("f", f)
+	fmt.Println("g", g)
+	fmt.Println("h", h, "err", err)
 
 	x := []interface{}{1, 2, 3, 4}
 	y := interfaces.Map(x, func(s interface{}) interface{} {
@@ -89,6 +104,12 @@ prints
 ```
 a [1 2 3 4]
 b [1? 2? 3? 4?]
+c [1 4 6 8]
+d [1 4 6 8]
+e [1 4 6 8] err <nil>
+f [1 a 2]
+g [1 2]
+h [] err strconv.Atoi: parsing "a": invalid syntax
 x [1 2 3 4]
 y [1! 2! 3! 4!]
 ```
