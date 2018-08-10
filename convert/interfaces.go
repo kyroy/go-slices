@@ -14,7 +14,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package convert provides type safe map functions between different types.
 package convert
 
 import (

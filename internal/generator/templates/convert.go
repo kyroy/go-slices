@@ -35,7 +35,6 @@ var ConvertTemplate = template.Must(template.New("convert.go").Funcs(funcMap).Pa
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package convert provides type safe map functions between different types.
 package convert
 
 import ({{ range .Other }}{{ if not (eq .Package $.Package) }}
