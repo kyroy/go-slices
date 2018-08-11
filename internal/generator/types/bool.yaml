@@ -75,3 +75,84 @@ tests:
     func: '{ return x }'
     out: 'true'
     found: false
+  convert:
+    strings:
+    - name: basic
+      in: '{true, false}'
+      func: 'return fmt.Sprint(x)'
+      out: '{"true", "false"}'
+    interfaces:
+    - name: basic
+      in: '{false, true}'
+      func: 'return x'
+      out: '{false, true}'
+    float32s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y float32; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    float64s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y float64; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    ints:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y int; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    int8s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y int8; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    int16s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y int16; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    int32s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y int32; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    int64s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y int64; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    uints:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y uint; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    uint8s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y uint8; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    uint16s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y uint16; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    uint32s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y uint32; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    uint64s:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y uint64; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    bytes:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y byte; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'
+    runes:
+    - name: basic
+      in: '{false, true}'
+      func: 'var y rune; if x { y = 2 } else { y = 1 }; return y'
+      out: '{1, 2}'

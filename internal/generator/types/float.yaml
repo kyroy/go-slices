@@ -71,3 +71,89 @@ tests:
     func: '{ return x > 5 }'
     out: '0'
     found: false
+  convert:
+    strings:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return fmt.Sprint(x)'
+      out: '{"1", "2", "3"}'
+    bools:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return x > 1'
+      out: '{false, true, true}'
+    interfaces:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return float64(x)'
+      out: '{1., 2., 3.}'
+    float32s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return float32(x)'
+      out: '{1, 2, 3}'
+    float64s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return float64(x)'
+      out: '{1, 2, 3}'
+    ints:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return int(x)'
+      out: '{1, 2, 3}'
+    int8s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return int8(x)'
+      out: '{1, 2, 3}'
+    int16s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return int16(x)'
+      out: '{1, 2, 3}'
+    int32s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return int32(x)'
+      out: '{1, 2, 3}'
+    int64s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return int64(x)'
+      out: '{1, 2, 3}'
+    uints:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return uint(x)'
+      out: '{1, 2, 3}'
+    uint8s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return uint8(x)'
+      out: '{1, 2, 3}'
+    uint16s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return uint16(x)'
+      out: '{1, 2, 3}'
+    uint32s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return uint32(x)'
+      out: '{1, 2, 3}'
+    uint64s:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return uint64(x)'
+      out: '{1, 2, 3}'
+    bytes:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return byte(x)'
+      out: '{1, 2, 3}'
+    runes:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return rune(x)'
+      out: '{1, 2, 3}'

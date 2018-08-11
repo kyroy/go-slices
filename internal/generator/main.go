@@ -90,6 +90,14 @@ type testDef struct {
 		Out   string
 		Found bool
 	}
+	Convert convertTests
+}
+
+type convertTests map[string][]struct {
+	Name string
+	In   string
+	Func string
+	Out  string
 }
 
 func main() {
@@ -122,6 +130,10 @@ func main() {
 		}
 		if err := generateTests(d); err != nil {
 			fmt.Printf("failed to generate tests: %v\n", err)
+			os.Exit(1)
+		}
+		if err := generateConvertTests(d, types); err != nil {
+			fmt.Printf("failed to generate convert tests: %v\n", err)
 			os.Exit(1)
 		}
 	}
@@ -256,6 +268,35 @@ func generateTests(d definition) error {
 		}
 		if err := internal.PackageTestTemplate.Execute(f, x); err != nil {
 			return fmt.Errorf("failed to generate tests %q: %v", t.Type, err)
+		}
+	}
+	return nil
+}
+
+func generateConvertTests(d definition, defs []sliceDef) error {
+	// convert/convert_test.go
+	for _, t := range d.Types {
+		if d.Tests == nil {
+			continue
+		}
+		f, err := os.Create(path.Join("convert", t.Package+"_test.go"))
+		if err != nil {
+			return fmt.Errorf("could not open file: %v", err)
+		}
+		defer f.Close()
+		x := struct {
+			Package string
+			Type    string
+			Other   []sliceDef
+			Tests   convertTests
+		}{
+			Package: t.Package,
+			Type:    t.Type,
+			Other:   defs,
+			Tests:   d.Tests.Convert,
+		}
+		if err := internal.ConvertTestTemplate.Execute(f, x); err != nil {
+			return fmt.Errorf("failed to generate convert tests: %v", err)
 		}
 	}
 	return nil

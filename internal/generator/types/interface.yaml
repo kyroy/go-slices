@@ -60,3 +60,9 @@ tests:
     func: '{ return x == nil }'
     out: '"x"'
     found: false
+  convert:
+    strings:
+    - name: basic
+      in: '{1, 2, 3}'
+      func: 'return fmt.Sprint(x)'
+      out: '{"1", "2", "3"}'
